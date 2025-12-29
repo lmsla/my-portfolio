@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState, useRef } from "react";
 import { X, Github, Link as LinkIcon, ExternalLink } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
@@ -6,7 +6,11 @@ import Image from "next/image";
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
-  content: React.ReactNode | string;
+  // content can be:
+  // 1. Image URL (string)
+  // 2. Static React Node (React.ReactNode)
+  // 3. Render Prop function for responsive scaling ((scale: number) => React.ReactNode)
+  content: React.ReactNode | string | ((scale: number) => React.ReactNode);
   title: string;
   description?: string;
   technologies?: string[];
@@ -17,6 +21,9 @@ interface ModalProps {
 }
 
 export default function Modal({ isOpen, onClose, content, title, description, technologies, links }: ModalProps) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [scale, setScale] = useState(1);
+
   // Close modal on Escape key press
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -32,7 +39,36 @@ export default function Modal({ isOpen, onClose, content, title, description, te
     };
   }, [isOpen, onClose]);
 
+  // Responsive Scaling Logic
+  useEffect(() => {
+    if (!isOpen || typeof content !== 'function') return;
+
+    const updateScale = () => {
+      if (containerRef.current) {
+        const { width } = containerRef.current.getBoundingClientRect();
+        // 1500 is the base width of our ArchitectureDiagram
+        // We calculate scale to fit the diagram into the container width
+        // We use Math.min(1, ...) to avoid scaling up if screen is huge
+        const newScale = Math.min(1, width / 1500);
+        setScale(newScale);
+      }
+    };
+
+    // Initial calculation
+    // Small delay to ensure modal is rendered and has width
+    const timer = setTimeout(updateScale, 100); 
+    
+    window.addEventListener('resize', updateScale);
+    
+    return () => {
+      window.removeEventListener('resize', updateScale);
+      clearTimeout(timer);
+    };
+  }, [isOpen, content]);
+
+
   const isImage = typeof content === "string";
+  const isRenderProp = typeof content === "function";
 
   return (
     <AnimatePresence>
@@ -41,14 +77,14 @@ export default function Modal({ isOpen, onClose, content, title, description, te
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-50 flex items-center justify-center p-2 bg-black/90 backdrop-blur-sm" // Reduced padding around modal
+          className="fixed inset-0 z-50 flex items-center justify-center p-2 bg-black/90 backdrop-blur-sm"
           onClick={onClose}
         >
           <motion.div
             initial={{ scale: 0.95, opacity: 0, y: 20 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.95, opacity: 0, y: 20 }}
-            className="relative bg-slate-900 rounded-2xl shadow-2xl w-[98vw] max-w-none max-h-[98vh] flex flex-col border border-slate-700 overflow-hidden" // Maximize modal size
+            className="relative bg-slate-900 rounded-2xl shadow-2xl w-[98vw] max-w-none max-h-[98vh] flex flex-col border border-slate-700 overflow-hidden"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Header */}
@@ -66,9 +102,10 @@ export default function Modal({ isOpen, onClose, content, title, description, te
             <div className="flex-1 overflow-y-auto custom-scrollbar">
                 
                 {/* 1. Architecture Diagram Area */}
-                {/* Added overflow-x-auto to allow horizontal scrolling if content is too wide */}
-                {/* Increased min-w for the diagram content */}
-                <div className="w-full bg-slate-950 p-8 flex items-center justify-center min-h-[500px] border-b border-slate-800 overflow-x-auto">
+                <div 
+                    ref={containerRef}
+                    className="w-full bg-slate-950 p-4 lg:p-8 flex items-center justify-center min-h-[400px] border-b border-slate-800 overflow-hidden relative"
+                >
                     {isImage ? (
                         <div className="relative w-full h-full min-h-[500px]">
                         <Image
@@ -79,10 +116,20 @@ export default function Modal({ isOpen, onClose, content, title, description, te
                             sizes="100vw"
                         />
                         </div>
+                    ) : isRenderProp ? (
+                        // Render Prop Case: Pass the dynamic scale
+                        // We set height dynamically to match the scaled content to avoid extra whitespace
+                        <div style={{ 
+                            width: 1500 * scale, 
+                            height: 700 * scale,
+                            transition: 'width 0.3s, height 0.3s' 
+                        }}>
+                             {(content as (scale: number) => React.ReactNode)(scale)}
+                        </div>
                     ) : (
-                        // Wrapper with increased min-width to ensure the diagram doesn't get squashed
+                         // Static React Node Case
                         <div className="min-w-[1200px] w-full h-full flex items-center justify-center scale-100">
-                            {content}
+                            {content as React.ReactNode}
                         </div>
                     )}
                 </div>

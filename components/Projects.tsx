@@ -10,18 +10,18 @@ import Image from "next/image";
 export default function Projects() {
   const [selectedProject, setSelectedProject] = useState<{
     title: string;
-    content: React.ReactNode | string;
+    content: React.ReactNode | string | ((scale: number) => React.ReactNode); // Updated type
     description: string;
     technologies: string[];
     links?: { github?: string; link?: string };
   } | null>(null);
 
   const handleProjectClick = (project: typeof personalData.projects[0]) => {
-    let content: React.ReactNode | string = "";
+    let content: React.ReactNode | string | ((scale: number) => React.ReactNode) = "";
 
     if (project.title === "Enterprise Security Data Platform") {
-      // Pass scale=1 for full size in modal
-      content = <ArchitectureDiagram scale={1} />;
+      // Pass a render function to receive dynamic scale from Modal
+      content = (scale: number) => <ArchitectureDiagram scale={scale} />;
     } else if (project.architectureImage) {
       content = project.architectureImage;
     } else {
