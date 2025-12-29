@@ -19,7 +19,7 @@ interface ModalProps {
 export default function Modal({ isOpen, onClose, content, title, description, technologies, links }: ModalProps) {
   // Close modal on Escape key press
   useEffect(() => {
-    const handleKeyDown = (e: KeyboardType) => {
+    const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
     };
     if (isOpen) {
