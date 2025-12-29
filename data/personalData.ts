@@ -35,7 +35,7 @@ export const personalData = {
       title: "Enterprise Security Data Platform",
       description: "Architected a centralized SIEM-like logging platform for a large-scale enterprise client. Designed a high-availability Elasticsearch cluster to ingest TB-scale daily logs from diverse sources (Firewalls, Servers, Applications) using Logstash and Beats. Created complex Kibana dashboards for SOC teams to monitor security threats in real-time.",
       technologies: ["Elasticsearch Cluster", "Logstash", "Filebeat", "Kibana", "Linux", "Security"],
-      // No github link implies it's a client project
+      architectureImage: "/images/architecture-siem.svg", // Path to your architecture diagram
     },
     {
       title: "K8s Observability & Monitoring Stack",

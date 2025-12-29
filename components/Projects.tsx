@@ -1,83 +1,124 @@
+"use client";
+
+import { useState } from "react";
 import { personalData } from "@/data/personalData";
-import { Github, Link as LinkIcon, Lock, Server } from "lucide-react";
+import { Github, Link as LinkIcon, Lock, Maximize2 } from "lucide-react";
+import Modal from "./Modal";
+import ArchitectureDiagram from "./ArchitectureDiagram";
+import Image from "next/image";
 
 export default function Projects() {
+  const [selectedProject, setSelectedProject] = useState<{
+    title: string;
+    content: React.ReactNode | string;
+    description: string;
+    technologies: string[];
+    links?: { github?: string; link?: string };
+  } | null>(null);
+
+  const handleProjectClick = (project: typeof personalData.projects[0]) => {
+    let content: React.ReactNode | string = "";
+
+    if (project.title === "Enterprise Security Data Platform") {
+      // Pass scale=1 for full size in modal
+      content = <ArchitectureDiagram scale={1} />;
+    } else if (project.architectureImage) {
+      content = project.architectureImage;
+    } else {
+        // Fallback or placeholder if no image
+        content = "/images/architecture-demo.svg"; 
+    }
+
+    setSelectedProject({
+      title: project.title,
+      content: content,
+      description: project.description,
+      technologies: project.technologies || [],
+      links: { github: project.github, link: project.link },
+    });
+  };
+
   return (
     <section id="projects" className="py-20 px-8 bg-gray-900 text-slate-200">
-      <div className="container mx-auto max-w-6xl">
-        <h2 className="text-4xl font-bold text-center text-blue-400 mb-12">
-          Key Projects & Architectures
+      <div className="container mx-auto max-w-7xl">
+        <h2 className="text-4xl font-bold text-center text-blue-400 mb-16">
+          Selected Projects
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
           {personalData.projects.map((project, index) => (
             <div
               key={index}
-              className="bg-slate-800 rounded-lg shadow-xl p-6 border border-slate-700 hover:border-blue-500/50 transition-all duration-300 flex flex-col group"
+              onClick={() => handleProjectClick(project)}
+              className="group cursor-pointer flex flex-col gap-4"
             >
-              {/* Header with Title and Type Icon */}
-              <div className="flex justify-between items-start mb-4">
-                <h3 className="text-xl font-bold text-slate-100 group-hover:text-blue-400 transition-colors">
-                  {project.title}
-                </h3>
-                <div className="p-2 bg-slate-700 rounded-lg text-blue-400">
-                  {project.github ? <Github size={20} /> : <Server size={20} />}
+              {/* Thumbnail Container */}
+              <div className="relative w-full h-56 bg-slate-800 rounded-2xl border border-slate-700 overflow-hidden shadow-lg group-hover:border-blue-500/50 group-hover:shadow-[0_0_20px_rgba(59,130,246,0.15)] transition-all duration-300 flex items-center justify-center">
+                
+                {/* Overlay on hover */}
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 z-20 transition-colors flex items-center justify-center">
+                    <Maximize2 className="text-white opacity-0 group-hover:opacity-100 transition-opacity scale-75 group-hover:scale-100" />
+                </div>
+
+                {/* Content Render */}
+                <div className="relative w-full h-full flex items-center justify-center overflow-hidden">
+                  {project.title === "Enterprise Security Data Platform" ? (
+                    // Scale down the React Component for thumbnail
+                    // We render the component with scale={0.25} directly
+                    <div className="flex items-center justify-center">
+                         <ArchitectureDiagram scale={0.25} />
+                    </div>
+                  ) : project.architectureImage ? (
+                    <Image
+                      src={project.architectureImage}
+                      alt={project.title}
+                      fill
+                      className="object-contain p-4 group-hover:scale-105 transition-transform duration-500"
+                    />
+                  ) : (
+                     <div className="flex flex-col items-center justify-center text-slate-600">
+                        <Lock size={48} />
+                        <span className="text-sm mt-2">Confidential</span>
+                     </div>
+                  )}
                 </div>
               </div>
 
-              {/* Technologies Tags */}
-              {project.technologies && project.technologies.length > 0 && (
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {project.technologies.map((tech, techIndex) => (
-                    <span
-                      key={techIndex}
-                      className="bg-slate-700/50 text-blue-300 text-xs px-2 py-1 rounded-md border border-slate-600/50"
-                    >
+              {/* Text Info */}
+              <div className="px-1">
+                <h3 className="text-xl font-bold text-slate-100 group-hover:text-blue-400 transition-colors mb-2">
+                  {project.title}
+                </h3>
+                <p className="text-slate-400 text-sm line-clamp-2 leading-relaxed">
+                  {project.description}
+                </p>
+                {/* Optional: Tech tags row */}
+                 <div className="flex flex-wrap gap-2 mt-3 opacity-60 group-hover:opacity-100 transition-opacity">
+                  {project.technologies?.slice(0, 3).map((tech, i) => (
+                    <span key={i} className="text-xs bg-slate-800 px-2 py-1 rounded text-slate-300 border border-slate-700">
                       {tech}
                     </span>
                   ))}
+                  {project.technologies && project.technologies.length > 3 && (
+                      <span className="text-xs text-slate-500 py-1">+ {project.technologies.length - 3}</span>
+                  )}
                 </div>
-              )}
-
-              {/* Description */}
-              <p className="text-slate-300 text-sm leading-relaxed mb-6 flex-grow border-t border-slate-700/50 pt-4">
-                {project.description}
-              </p>
-
-              {/* Footer Actions */}
-              <div className="flex items-center gap-4 mt-auto pt-4 border-t border-slate-700/50">
-                {project.github ? (
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-sm text-slate-400 hover:text-white transition-colors"
-                  >
-                    <Github size={16} />
-                    <span>View Code</span>
-                  </a>
-                ) : (
-                  <div className="flex items-center gap-2 text-sm text-slate-500 cursor-not-allowed">
-                    <Lock size={16} />
-                    <span>Proprietary / Client Project</span>
-                  </div>
-                )}
-                
-                {project.link && (
-                  <a
-                    href={project.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-sm text-slate-400 hover:text-white transition-colors ml-auto"
-                  >
-                    <LinkIcon size={16} />
-                    <span>Live Demo</span>
-                  </a>
-                )}
               </div>
             </div>
           ))}
         </div>
       </div>
+
+      {/* Modal Component */}
+      <Modal
+        isOpen={!!selectedProject}
+        onClose={() => setSelectedProject(null)}
+        content={selectedProject?.content || ""}
+        title={selectedProject?.title || ""}
+        description={selectedProject?.description}
+        technologies={selectedProject?.technologies}
+        links={selectedProject?.links}
+      />
     </section>
   );
 }
