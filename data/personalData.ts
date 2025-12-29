@@ -3,86 +3,66 @@
 export const personalData = {
   name: "Russell Chen",
   title: "DevOps & Data Engineer",
-  tagline: "Building scalable infrastructure and unlocking data insights.",
+  tagline: "Bridging the gap between Infrastructure, Data, and Security.",
   about: [
-    "A passionate engineer with expertise in Backend Development, Data Engineering, and DevOps practices. I thrive on building robust systems and optimizing workflows.",
-    "My journey has involved working on diverse projects, from designing efficient data pipelines to implementing resilient CI/CD systems and managing cloud infrastructure.",
-    "I am constantly learning new technologies and looking for opportunities to leverage automation and data-driven approaches to solve complex problems.",
+    "I specialize in building resilient data infrastructures and observability platforms. With a strong background in backend development and DevOps, I help organizations transform raw logs into actionable security insights.",
+    "My core expertise lies in the Elastic Stack (ELK), Kubernetes, and cloud-native observability. I have successfully architected and deployed large-scale log analysis systems for enterprise clients, handling massive data ingestion and real-time visualization.",
+    "I am passionate about automating complex workflows, optimizing cluster performance, and designing secure, scalable systems that drive business value.",
   ],
   contact: {
     email: "your.email@example.com",
-    github: "https://github.com/your-github-username", // 替換為您的 GitHub 連結
-    linkedin: "https://www.linkedin.com/in/your-linkedin-profile", // 替換為您的 LinkedIn 連結
+    github: "https://github.com/your-github-username",
+    linkedin: "https://www.linkedin.com/in/your-linkedin-profile",
   },
   skills: {
-    devops: [
-      "Kubernetes",
-      "Docker",
-      "GitLab CI/CD",
-      "ArgoCD",
-      "Terraform",
-      "Ansible",
-      "Prometheus",
-      "Grafana",
-    ],
-    dataEngineering: [
-      "Python",
-      "SQL",
-      "Apache Spark",
-      "Kafka",
-      "Airflow",
-      "ETL Design",
-      "Data Warehousing",
-    ],
-    backend: ["Golang", "Python", "Node.js", "REST APIs", "Microservices"],
-    cloud: ["AWS", "GCP", "Azure"],
+    languages: ["Python", "Golang", "SQL", "Bash"],
+    devops: ["Docker", "Kubernetes", "GitLab CI", "ArgoCD"],
+    dataEngineering: ["Elasticsearch"],
+    observability: ["Grafana", "ELK Stack"],
   },
   experience: [
     {
-      title: "Senior DevOps Engineer",
-      company: "Tech Solutions Inc.",
-      years: "2022 - Present",
-      description: "Led the design and implementation of scalable CI/CD pipelines, managed Kubernetes clusters, and optimized cloud infrastructure costs by 20%.",
-      technologies: ["Kubernetes", "GitLab CI/CD", "Terraform", "AWS", "Python"],
+      title: "Senior Data & DevOps Engineer",
+      company: "Your Current Company",
+      years: "20XX - Present",
+      description: "Spearheading the delivery of security data platforms for enterprise clients. Managing the full lifecycle of data pipelines from ingestion to visualization.",
+      technologies: ["Elasticsearch", "Kubernetes", "Python", "Ansible", "Linux"],
     },
-    {
-      title: "Data Engineer",
-      company: "Data Insights Co.",
-      years: "2019 - 2022",
-      description: "Developed and maintained robust ETL processes, built data warehouses, and improved data quality for analytical reporting.",
-      technologies: ["Python", "Spark", "SQL", "Airflow", "PostgreSQL"],
-    },
+    // Add more experience here
   ],
   projects: [
     {
-      title: "Automated Data Pipeline for E-commerce",
-      description: "Designed and implemented an end-to-end data pipeline using Kafka, Spark, and Airflow to process real-time e-commerce transaction data, improving analytical reporting latency by 50%.",
-      technologies: ["Kafka", "Apache Spark", "Airflow", "Python", "AWS S3"],
-      github: "https://github.com/your-github/project1",
-      link: "https://your-demo-link.com/project1",
-      image: "/images/project1.jpg", // Placeholder
+      title: "Enterprise Security Data Platform",
+      description: "Architected a centralized SIEM-like logging platform for a large-scale enterprise client. Designed a high-availability Elasticsearch cluster to ingest TB-scale daily logs from diverse sources (Firewalls, Servers, Applications) using Logstash and Beats. Created complex Kibana dashboards for SOC teams to monitor security threats in real-time.",
+      technologies: ["Elasticsearch Cluster", "Logstash", "Filebeat", "Kibana", "Linux", "Security"],
+      // No github link implies it's a client project
     },
     {
-      title: "Kubernetes Cluster Management Tool",
-      description: "Developed a custom CLI tool in Golang for simplified management and monitoring of Kubernetes clusters across multiple environments.",
-      technologies: ["Golang", "Kubernetes API", "Prometheus", "Grafana"],
-      github: "https://github.com/your-github/project2",
-      link: "https://your-demo-link.com/project2",
-      image: "/images/project2.jpg", // Placeholder
+      title: "K8s Observability & Monitoring Stack",
+      description: "Implemented a comprehensive observability solution for a microservices environment. Deployed Prometheus and Grafana for metrics collection, integrated with the ELK stack for log correlation. Established alerting rules to proactively detect system anomalies and reduce downtime.",
+      technologies: ["Kubernetes", "Prometheus", "Grafana", "Alertmanager", "Fluentd"],
+      // No github link
+    },
+    {
+      title: "Personal Portfolio Website",
+      description: "Designed and developed a modern, responsive portfolio website using Next.js and Tailwind CSS. Implemented a fully automated CI/CD pipeline using GitHub Actions to build and deploy to GitHub Pages.",
+      technologies: ["Next.js", "TypeScript", "Tailwind CSS", "GitHub Actions"],
+      github: "https://github.com/lmsla/my-portfolio", // This is your actual repo!
+      link: "https://lmsla.github.io/my-portfolio/",
     },
   ],
   certificates: [
     {
-      name: "Google Cloud Professional DevOps Engineer",
-      issuer: "Google Cloud",
-      date: "2023-05",
-      link: "https://www.credly.com/badges/...",
+      name: "Elastic Certified Engineer",
+      issuer: "Elastic",
+      date: "202X",
+      link: "#",
     },
     {
       name: "Certified Kubernetes Administrator (CKA)",
       issuer: "CNCF",
-      date: "2022-11",
-      link: "https://www.credly.com/badges/...",
+      date: "202X",
+      link: "#",
     },
   ],
 };
