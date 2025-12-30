@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-import { X, Github, Link as LinkIcon, ExternalLink } from "lucide-react";
+import { X, Github, Link as LinkIcon, ExternalLink, ChevronLeft, ChevronRight, LayoutGrid, Image as ImageIcon } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 
@@ -7,9 +7,8 @@ interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
   // content can be:
-  // 1. Image URL (string)
-  // 2. Static React Node (React.ReactNode)
-  // 3. Render Prop function for responsive scaling ((scale: number) => React.ReactNode)
+  // 1. Image URL (string) for static architecture images
+  // 2. Render Prop function for responsive scaling ((scale: number) => React.ReactNode) for dynamic diagrams
   content: React.ReactNode | string | ((scale: number) => React.ReactNode);
   title: string;
   description?: string;
@@ -18,11 +17,23 @@ interface ModalProps {
     github?: string;
     link?: string;
   };
+  gallery?: string[]; // Added gallery field for additional images/screenshots
 }
 
-export default function Modal({ isOpen, onClose, content, title, description, technologies, links }: ModalProps) {
+export default function Modal({ isOpen, onClose, content, title, description, technologies, links, gallery }: ModalProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(1);
+  const [currentSlide, setCurrentSlide] = useState(0); // 0 for main content, 1+ for gallery
+
+  // Total number of slides (main content + gallery images)
+  const totalSlides = (gallery?.length || 0) + 1;
+
+  // Reset slide when modal opens or closes
+  useEffect(() => {
+    if (isOpen) {
+      setCurrentSlide(0); // Always start with the main content (architecture diagram)
+    }
+  }, [isOpen]);
 
   // Close modal on Escape key press
   useEffect(() => {
@@ -39,36 +50,71 @@ export default function Modal({ isOpen, onClose, content, title, description, te
     };
   }, [isOpen, onClose]);
 
-  // Responsive Scaling Logic
+  // Responsive Scaling Logic for ArchitectureDiagram
   useEffect(() => {
     if (!isOpen || typeof content !== 'function') return;
 
     const updateScale = () => {
       if (containerRef.current) {
+        // Adjust width to account for padding
         const { width } = containerRef.current.getBoundingClientRect();
+        const effectiveWidth = width - (window.innerWidth >= 1024 ? 64 : 32); // Subtract padding from p-8 or p-4
+        
         // 1500 is the base width of our ArchitectureDiagram
-        // We calculate scale to fit the diagram into the container width
-        // We use Math.min(1, ...) to avoid scaling up if screen is huge
-        const newScale = Math.min(1, width / 1500);
+        const newScale = Math.min(1, effectiveWidth / 1500);
         setScale(newScale);
       }
     };
 
-    // Initial calculation
-    // Small delay to ensure modal is rendered and has width
     const timer = setTimeout(updateScale, 100); 
-    
     window.addEventListener('resize', updateScale);
     
     return () => {
       window.removeEventListener('resize', updateScale);
       clearTimeout(timer);
     };
-  }, [isOpen, content]);
+  }, [isOpen, content, currentSlide]); // Recalculate if slide changes
 
-
-  const isImage = typeof content === "string";
   const isRenderProp = typeof content === "function";
+
+  // Function to render the current slide content
+  const renderSlideContent = () => {
+    if (currentSlide === 0) {
+      // Main Content (Architecture Diagram or static image)
+      if (isRenderProp) {
+        return (content as (scale: number) => React.ReactNode)(scale);
+      } else if (typeof content === "string") {
+        return (
+          <Image
+            src={content}
+            alt={`${title} Architecture`}
+            fill
+            className="object-contain"
+            sizes="100vw"
+          />
+        );
+      }
+      return content as React.ReactNode; // Fallback for static React Node
+    } else {
+      // Gallery images
+      const imageUrl = gallery?.[currentSlide - 1];
+      if (imageUrl) {
+        return (
+          <Image
+            src={imageUrl}
+            alt={`${title} Screenshot ${currentSlide}`}
+            fill
+            className="object-contain"
+            sizes="100vw"
+          />
+        );
+      }
+    }
+    return null; // Should not happen
+  };
+
+  const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % totalSlides);
+  const prevSlide = () => setCurrentSlide((prev) => (prev - 1 + totalSlides) % totalSlides);
 
   return (
     <AnimatePresence>
@@ -99,56 +145,75 @@ export default function Modal({ isOpen, onClose, content, title, description, te
             </div>
 
             {/* Scrollable Body */}
-            <div className="flex-1 overflow-y-auto custom-scrollbar">
+            <div className="flex-1 overflow-y-auto custom-scrollbar flex flex-col lg:flex-row">
                 
-                {/* 1. Architecture Diagram Area */}
+                {/* 1. Architecture Diagram / Gallery Area */}
                 <div 
                     ref={containerRef}
-                    className="w-full bg-slate-950 p-4 lg:p-8 flex items-center justify-center min-h-[400px] border-b border-slate-800 overflow-hidden relative"
+                    className="relative w-full lg:w-3/4 bg-slate-950 p-4 lg:p-8 flex items-center justify-center min-h-[400px] lg:min-h-[500px] border-b lg:border-b-0 lg:border-r border-slate-800 overflow-hidden flex-shrink-0"
                 >
-                    {isImage ? (
-                        <div className="relative w-full h-full min-h-[500px]">
-                        <Image
-                            src={content as string}
-                            alt={`${title} Architecture`}
-                            fill
-                            className="object-contain"
-                            sizes="100vw"
-                        />
-                        </div>
-                    ) : isRenderProp ? (
-                        // Render Prop Case: Pass the dynamic scale
-                        // We set height dynamically to match the scaled content to avoid extra whitespace
-                        <div style={{ 
-                            width: 1500 * scale, 
-                            height: 700 * scale,
-                            transition: 'width 0.3s, height 0.3s' 
-                        }}>
-                             {(content as (scale: number) => React.ReactNode)(scale)}
-                        </div>
-                    ) : (
-                         // Static React Node Case
-                        <div className="min-w-[1200px] w-full h-full flex items-center justify-center scale-100">
-                            {content as React.ReactNode}
-                        </div>
-                    )}
+                    {/* Carousel Content */}
+                    <div className="relative w-full h-full flex items-center justify-center">
+                        <AnimatePresence mode="wait">
+                            <motion.div
+                                key={currentSlide}
+                                initial={{ opacity: 0, y: 10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -10 }}
+                                transition={{ duration: 0.2 }}
+                                className="relative w-full h-full flex items-center justify-center"
+                            >
+                                <div className="relative w-full h-full">
+                                    {renderSlideContent()}
+                                </div>
+                            </motion.div>
+                        </AnimatePresence>
+
+                        {/* Navigation Arrows */}
+                        {totalSlides > 1 && (
+                            <>
+                                <button
+                                    onClick={prevSlide}
+                                    className="absolute left-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/50 hover:bg-black/70 text-white z-20"
+                                >
+                                    <ChevronLeft size={24} />
+                                </button>
+                                <button
+                                    onClick={nextSlide}
+                                    className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/50 hover:bg-black/70 text-white z-20"
+                                >
+                                    <ChevronRight size={24} />
+                                </button>
+                            </>
+                        )}
+
+                        {/* Slide Indicators */}
+                        {totalSlides > 1 && (
+                            <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1 bg-black/50 px-3 py-1 rounded-full z-20">
+                                <span className="text-sm text-slate-200 flex items-center gap-1">
+                                    {currentSlide === 0 ? <LayoutGrid size={16} /> : <ImageIcon size={16} />}
+                                    {currentSlide + 1} / {totalSlides}
+                                </span>
+                            </div>
+                        )}
+                    </div>
                 </div>
 
-                {/* 2. Project Details Area */}
-                <div className="p-8 bg-slate-900">
-                    <div className="flex flex-col lg:flex-row gap-8 lg:gap-12">
+                {/* 2. Project Details Area (right sidebar on large screens) */}
+                <div className="w-full lg:w-1/4 p-8 bg-slate-900 flex-shrink-0">
+                    <div className="flex flex-col gap-8">
                         {/* Description */}
-                        <div className="flex-1">
+                        <div>
                             <h4 className="text-lg font-semibold text-blue-400 mb-4 flex items-center gap-2">
                                 Project Overview
                             </h4>
-                            <p className="text-slate-300 leading-relaxed text-lg whitespace-pre-line">
+                            <p className="text-slate-300 leading-relaxed text-sm whitespace-pre-line">
                                 {description}
                             </p>
                         </div>
 
                         {/* Sidebar: Tech & Links */}
-                        <div className="lg:w-80 flex-shrink-0 flex flex-col gap-8">
+                        <div className="flex flex-col gap-8">
                             {/* Technologies */}
                             {technologies && technologies.length > 0 && (
                                 <div>

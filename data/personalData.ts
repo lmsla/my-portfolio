@@ -32,10 +32,22 @@ export const personalData = {
   ],
   projects: [
     {
-      title: "Enterprise Security Data Platform",
-      description: "Architected a centralized SIEM-like logging platform for a large-scale enterprise client. Designed a high-availability Elasticsearch cluster to ingest TB-scale daily logs from diverse sources (Firewalls, Servers, Applications) using Logstash and Beats. Created complex Kibana dashboards for SOC teams to monitor security threats in real-time.",
-      technologies: ["Elasticsearch Cluster", "Logstash", "Filebeat", "Kibana", "Linux", "Security"],
-      architectureImage: "/images/architecture-siem.svg", // Path to your architecture diagram
+      title: "華新麗華-資安數據中台",
+      description: "為華新麗華集團設計並實施集中式資安資訊與事件管理 (SIEM) 數據平台。該平台透過 Winlogbeat 從 Windows AD 伺服器以及從 F5 WAF、Fortigate、Cisco ASA、Citrix 等關鍵網路安全設備，即時採集日誌數據，並匯入強大的 Logstash 處理管線進行解析與豐富化。架構設計採用高可用性的 Elasticsearch 叢集，分層儲存為 Hot-Warm 節點，以優化近期數據的查詢效能並確保成本效益的長期資料保存。透過客製化的 Kibana 儀表板，提供了全面的資安可視性，有效協助 SOC 團隊偵測與應對資安威脅。",
+      technologies: ["Elasticsearch Cluster", "Logstash", "Winlogbeat", "Kibana", "F5 WAF", "Fortigate", "Cisco ASA"],
+      // Add gallery images here
+      gallery: [
+        "/images/projects/walsin/dashboard-1.jpeg",
+        // If you have more screenshots, add their paths here, e.g., "/images/projects/walsin/dashboard-2.jpeg"
+      ],
+      // Custom architecture component is rendered for this project title in Projects.tsx
+    },
+    {
+      title: "京城銀行-資安數據中台",
+      description: "為京城銀行構建一套全面性的資安數據監控與分析平台。整合多種資產設備日誌（如 ASA, F5 WAF, AD Event 等），透過自動化採集與解析腳本，將異質日誌數據標準化後匯入 Elasticsearch 叢集進行儲存與檢索。平台提供 Kibana Dashboards 進行實時視覺化，並支援告警引擎與戰情室功能，以提升資安事件響應效率。",
+      technologies: ["Elasticsearch", "Logstash", "Kibana", "Draw.io", "Shell Script", "Go", "ASA", "F5 WAF"], // 根據SVG內容調整
+      architectureImage: "/flowcharts/ktb.svg", 
+      gallery: [], // 暫無截圖
     },
     {
       title: "K8s Observability & Monitoring Stack",

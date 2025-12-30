@@ -7,25 +7,30 @@ import Modal from "./Modal";
 import ArchitectureDiagram from "./ArchitectureDiagram";
 import Image from "next/image";
 
+// Define the type for what we pass to the Modal
+interface ModalProjectData {
+  title: string;
+  // content can be:
+  // 1. Image URL (string) for static architecture images
+  // 2. Render Prop function for responsive scaling ((scale: number) => React.ReactNode) for dynamic diagrams
+  content: React.ReactNode | string | ((scale: number) => React.ReactNode);
+  description: string;
+  technologies: string[];
+  links?: { github?: string; link?: string };
+  gallery?: string[]; // Added gallery field
+}
+
 export default function Projects() {
-  const [selectedProject, setSelectedProject] = useState<{
-    title: string;
-    content: React.ReactNode | string | ((scale: number) => React.ReactNode); // Updated type
-    description: string;
-    technologies: string[];
-    links?: { github?: string; link?: string };
-  } | null>(null);
+  const [selectedProject, setSelectedProject] = useState<ModalProjectData | null>(null);
 
   const handleProjectClick = (project: typeof personalData.projects[0]) => {
     let content: React.ReactNode | string | ((scale: number) => React.ReactNode) = "";
 
-    if (project.title === "Enterprise Security Data Platform") {
-      // Pass a render function to receive dynamic scale from Modal
+    if (project.title === "華新麗華-資安數據中台") {
       content = (scale: number) => <ArchitectureDiagram scale={scale} />;
     } else if (project.architectureImage) {
       content = project.architectureImage;
     } else {
-        // Fallback or placeholder if no image
         content = "/images/architecture-demo.svg"; 
     }
 
@@ -35,6 +40,7 @@ export default function Projects() {
       description: project.description,
       technologies: project.technologies || [],
       links: { github: project.github, link: project.link },
+      gallery: project.gallery || [], // Pass gallery data
     });
   };
 
@@ -62,7 +68,7 @@ export default function Projects() {
 
                 {/* Content Render */}
                 <div className="relative w-full h-full flex items-center justify-center overflow-hidden">
-                  {project.title === "Enterprise Security Data Platform" ? (
+                  {project.title === "華新麗華-資安數據中台" ? (
                     // Scale down the React Component for thumbnail
                     // We render the component with scale={0.25} directly
                     <div className="flex items-center justify-center">
@@ -118,6 +124,7 @@ export default function Projects() {
         description={selectedProject?.description}
         technologies={selectedProject?.technologies}
         links={selectedProject?.links}
+        gallery={selectedProject?.gallery} // Pass gallery data to Modal
       />
     </section>
   );
