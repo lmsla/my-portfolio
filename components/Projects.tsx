@@ -6,22 +6,17 @@ import { Github, Link as LinkIcon, Lock, Maximize2 } from "lucide-react";
 import Modal from "./Modal";
 import ArchitectureDiagram from "./ArchitectureDiagram";
 import Image from "next/image";
-
-// Define the type for what we pass to the Modal
-interface ModalProjectData {
-  title: string;
-  // content can be:
-  // 1. Image URL (string) for static architecture images
-  // 2. Render Prop function for responsive scaling ((scale: number) => React.ReactNode) for dynamic diagrams
-  content: React.ReactNode | string | ((scale: number) => React.ReactNode);
-  description: string;
-  technologies: string[];
-  links?: { github?: string; link?: string };
-  gallery?: string[]; // Added gallery field
-}
+import { withPrefix } from "@/utils/prefix"; // Import withPrefix
 
 export default function Projects() {
-  const [selectedProject, setSelectedProject] = useState<ModalProjectData | null>(null);
+  const [selectedProject, setSelectedProject] = useState<{
+    title: string;
+    content: React.ReactNode | string | ((scale: number) => React.ReactNode);
+    description: string;
+    technologies: string[];
+    links?: { github?: string; link?: string };
+    gallery?: string[];
+  } | null>(null);
 
   const handleProjectClick = (project: typeof personalData.projects[0]) => {
     let content: React.ReactNode | string | ((scale: number) => React.ReactNode) = "";
@@ -29,10 +24,14 @@ export default function Projects() {
     if (project.title === "華新麗華-資安數據中台") {
       content = (scale: number) => <ArchitectureDiagram scale={scale} />;
     } else if (project.architectureImage) {
-      content = project.architectureImage;
+      // Use withPrefix for static architecture image
+      content = withPrefix(project.architectureImage);
     } else {
-        content = "/images/architecture-demo.svg"; 
+        content = withPrefix("/images/architecture-demo.svg"); 
     }
+
+    // Process gallery images with prefix
+    const galleryWithPrefix = project.gallery ? project.gallery.map(img => withPrefix(img)) : [];
 
     setSelectedProject({
       title: project.title,
@@ -40,7 +39,7 @@ export default function Projects() {
       description: project.description,
       technologies: project.technologies || [],
       links: { github: project.github, link: project.link },
-      gallery: project.gallery || [], // Pass gallery data
+      gallery: galleryWithPrefix,
     });
   };
 
@@ -69,14 +68,12 @@ export default function Projects() {
                 {/* Content Render */}
                 <div className="relative w-full h-full flex items-center justify-center overflow-hidden">
                   {project.title === "華新麗華-資安數據中台" ? (
-                    // Scale down the React Component for thumbnail
-                    // We render the component with scale={0.25} directly
                     <div className="flex items-center justify-center">
                          <ArchitectureDiagram scale={0.25} />
                     </div>
                   ) : project.architectureImage ? (
                     <Image
-                      src={project.architectureImage}
+                      src={withPrefix(project.architectureImage)} // Use withPrefix
                       alt={project.title}
                       fill
                       className="object-contain p-4 group-hover:scale-105 transition-transform duration-500"
@@ -98,7 +95,6 @@ export default function Projects() {
                 <p className="text-slate-400 text-sm line-clamp-2 leading-relaxed">
                   {project.description}
                 </p>
-                {/* Optional: Tech tags row */}
                  <div className="flex flex-wrap gap-2 mt-3 opacity-60 group-hover:opacity-100 transition-opacity">
                   {project.technologies?.slice(0, 3).map((tech, i) => (
                     <span key={i} className="text-xs bg-slate-800 px-2 py-1 rounded text-slate-300 border border-slate-700">
@@ -124,7 +120,7 @@ export default function Projects() {
         description={selectedProject?.description}
         technologies={selectedProject?.technologies}
         links={selectedProject?.links}
-        gallery={selectedProject?.gallery} // Pass gallery data to Modal
+        gallery={selectedProject?.gallery}
       />
     </section>
   );
