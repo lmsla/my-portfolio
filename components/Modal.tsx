@@ -17,7 +17,7 @@ interface ModalProps {
     github?: string;
     link?: string;
   };
-  gallery?: string[]; // Added gallery field for additional images/screenshots
+  gallery?: (string | { src: string; caption?: string })[]; // Updated to support captions
 }
 
 export default function Modal({ isOpen, onClose, content, title, description, technologies, links, gallery }: ModalProps) {
@@ -97,16 +97,28 @@ export default function Modal({ isOpen, onClose, content, title, description, te
       return content as React.ReactNode; // Fallback for static React Node
     } else {
       // Gallery images
-      const imageUrl = gallery?.[currentSlide - 1];
+      const item = gallery?.[currentSlide - 1];
+      const imageUrl = typeof item === 'string' ? item : item?.src;
+      const caption = typeof item === 'object' ? item?.caption : null;
+
       if (imageUrl) {
         return (
-          <Image
-            src={imageUrl}
-            alt={`${title} Screenshot ${currentSlide}`}
-            fill
-            className="object-contain"
-            sizes="100vw"
-          />
+          <>
+            <Image
+              src={imageUrl}
+              alt={`${title} Screenshot ${currentSlide}`}
+              fill
+              className="object-contain"
+              sizes="100vw"
+            />
+            {caption && (
+               <div className="absolute bottom-4 left-0 right-0 text-center px-4 pointer-events-none">
+                 <span className="inline-block bg-black/60 backdrop-blur-sm text-slate-200 text-sm px-3 py-1.5 rounded-lg border border-slate-700/50 shadow-lg">
+                   {caption}
+                 </span>
+               </div>
+            )}
+          </>
         );
       }
     }

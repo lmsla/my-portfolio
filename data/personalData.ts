@@ -32,27 +32,48 @@ export const personalData = {
   ],
   projects: [
     {
-      title: "華新麗華-資安數據中台",
+      title: "華新麗華-SIEM 資訊安全事件管理平台",
       description: "為華新麗華集團設計並實施集中式資安資訊與事件管理 (SIEM) 數據平台。該平台透過 Winlogbeat 從 Windows AD 伺服器以及從 F5 WAF、Fortigate、Cisco ASA、Citrix 等關鍵網路安全設備，即時採集日誌數據，並匯入強大的 Logstash 處理管線進行解析與豐富化。架構設計採用高可用性的 Elasticsearch 叢集，分層儲存為 Hot-Warm 節點，以優化近期數據的查詢效能並確保成本效益的長期資料保存。透過客製化的 Kibana 儀表板，提供了全面的資安可視性，有效協助 SOC 團隊偵測與應對資安威脅。",
       technologies: ["Elasticsearch Cluster", "Logstash", "Winlogbeat", "Kibana", "F5 WAF", "Fortigate", "Cisco ASA"],
+      architectureImage: "/flowcharts/walsin.svg",
       // Add gallery images here
       gallery: [
-        "/images/projects/walsin/dashboard-1.jpeg",
+        {
+          src: "/images/projects/walsin/dashboard-1.jpeg",
+          caption: "Cisco ASA Traffic 流量即時監控",
+        },
         // If you have more screenshots, add their paths here, e.g., "/images/projects/walsin/dashboard-2.jpeg"
       ],
       // Custom architecture component is rendered for this project title in Projects.tsx
     },
     {
-      title: "京城銀行-資安數據中台",
+      title: "京城銀行-日誌集中分析管理平台",
       description: "為京城銀行構建一套全面性的資安數據監控與分析平台。整合多種資產設備日誌（如 ASA, F5 WAF, AD Event 等），透過自動化採集與解析腳本，將異質日誌數據標準化後匯入 Elasticsearch 叢集進行儲存與檢索。平台提供 Kibana Dashboards 進行實時視覺化，並支援告警引擎與戰情室功能，以提升資安事件響應效率。",
       technologies: ["Elasticsearch", "Logstash", "Kibana", "Draw.io", "Shell Script", "Go", "ASA", "F5 WAF"], // 根據SVG內容調整
       architectureImage: "/flowcharts/ktb.svg", 
-      gallery: [], // 暫無截圖
+      gallery: [
+        {
+          src: "/images/projects/ktb/dashboard-1.png",
+          caption: "IPS攻擊來源每月統計",
+        },
+
+      ], // 暫無截圖
     },
     {
-      title: "K8s Observability & Monitoring Stack",
-      description: "Implemented a comprehensive observability solution for a microservices environment. Deployed Prometheus and Grafana for metrics collection, integrated with the ELK stack for log correlation. Established alerting rules to proactively detect system anomalies and reduce downtime.",
-      technologies: ["Kubernetes", "Prometheus", "Grafana", "Alertmanager", "Fluentd"],
+      title: "台泥集團日誌系統汰換專案",
+      description: "為台泥集團建置基於 ELK Stack 的大數據資安分析平台，汰換舊有系統以提升資安偵測效能。專案橫跨總處與關企，採用高可用性 Elasticsearch 叢集與 Redis 緩衝架構，整合超過 20 種異質日誌源（如 Firewall, AD, Linux, DB）。透過 Logstash 進行數據正規化，並客製化 Kibana 儀表板實現流量分析、威脅偵測等資安可視化，結合自動化告警機制，強化集團整體資安維運監控。",
+      technologies: ["Elasticsearch", "Logstash", "Kibana", "Redis", "Filebeat", "Winlogbeat"],
+      architectureImage: "/flowcharts/tcci.svg",
+      gallery: [
+        {
+          src: "/images/projects/tcci/dashboard-1.png",
+          caption: "DDoS 攻擊分析儀表板",
+        },
+        {
+          src: "/images/projects/tcci/dashboard-2.png",
+          caption: "FortiGate 流量分析儀表板",
+        },
+      ],
       // No github link
     },
     {

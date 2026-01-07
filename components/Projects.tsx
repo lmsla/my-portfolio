@@ -15,15 +15,13 @@ export default function Projects() {
     description: string;
     technologies: string[];
     links?: { github?: string; link?: string };
-    gallery?: string[];
+    gallery?: (string | { src: string; caption?: string })[];
   } | null>(null);
 
   const handleProjectClick = (project: typeof personalData.projects[0]) => {
     let content: React.ReactNode | string | ((scale: number) => React.ReactNode) = "";
 
-    if (project.title === "華新麗華-資安數據中台") {
-      content = (scale: number) => <ArchitectureDiagram scale={scale} />;
-    } else if (project.architectureImage) {
+    if (project.architectureImage) {
       // Use withPrefix for static architecture image
       content = withPrefix(project.architectureImage);
     } else {
@@ -31,7 +29,16 @@ export default function Projects() {
     }
 
     // Process gallery images with prefix
-    const galleryWithPrefix = project.gallery ? project.gallery.map(img => withPrefix(img)) : [];
+    const galleryWithPrefix = project.gallery ? project.gallery.map(item => {
+        if (typeof item === 'string') {
+            return withPrefix(item);
+        } else {
+            return {
+                ...item,
+                src: withPrefix(item.src)
+            };
+        }
+    }) : [];
 
     setSelectedProject({
       title: project.title,
@@ -67,11 +74,7 @@ export default function Projects() {
 
                 {/* Content Render */}
                 <div className="relative w-full h-full flex items-center justify-center overflow-hidden">
-                  {project.title === "華新麗華-資安數據中台" ? (
-                    <div className="flex items-center justify-center">
-                         <ArchitectureDiagram scale={0.25} />
-                    </div>
-                  ) : project.architectureImage ? (
+                  {project.architectureImage ? (
                     <Image
                       src={withPrefix(project.architectureImage)} // Use withPrefix
                       alt={project.title}
