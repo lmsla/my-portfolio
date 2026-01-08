@@ -77,6 +77,13 @@ export const personalData = {
       // No github link
     },
     {
+      title: "NSB 專案 (名稱待定)",
+      description: "專案描述待補充...",
+      technologies: ["Elasticsearch", "Logstash", "Kibana"],
+      architectureImage: "/flowcharts/nsb.svg",
+      gallery: [],
+    },
+    {
       title: "Personal Portfolio Website",
       description: "Designed and developed a modern, responsive portfolio website using Next.js and Tailwind CSS. Implemented a fully automated CI/CD pipeline using GitHub Actions to build and deploy to GitHub Pages.",
       technologies: ["Next.js", "TypeScript", "Tailwind CSS", "GitHub Actions"],
