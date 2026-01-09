@@ -32,6 +32,26 @@ export const personalData = {
   ],
   projects: [
     {
+      title: "宏遠證券SIEM平台建置專案",
+      description: "為宏遠證券建置全方位的資安事件管理平台。整合多種異質日誌源（包括 Windows AD、防火牆、Linux 系統等），透過視覺化儀表板即時監控資安威脅與系統健康狀態，提升資安維運效率。",
+      technologies: ["Elasticsearch", "Logstash", "Kibana", "Windows AD", "Fortigate", "Linux"],
+      architectureImage: "/flowcharts/honsec.svg",
+      gallery: [
+        {
+          src: "/images/projects/honsec/syslog-日誌監控.png",
+          caption: "Syslog 日誌監控總覽",
+        },
+        {
+          src: "/images/projects/honsec/forti-traffic.png",
+          caption: "Fortigate 流量分析",
+        },
+        {
+          src: "/images/projects/honsec/win-security.png",
+          caption: "Windows 安全事件監控",
+        },
+      ],
+    },
+    {
       title: "華新麗華-SIEM 資訊安全事件管理平台",
       description: "為華新麗華集團設計並實施集中式資安資訊與事件管理 (SIEM) 數據平台。該平台透過 Winlogbeat 從 Windows AD 伺服器以及從 F5 WAF、Fortigate、Cisco ASA、Citrix 等關鍵網路安全設備，即時採集日誌數據，並匯入強大的 Logstash 處理管線進行解析與豐富化。架構設計採用高可用性的 Elasticsearch 叢集，分層儲存為 Hot-Warm 節點，以優化近期數據的查詢效能並確保成本效益的長期資料保存。透過客製化的 Kibana 儀表板，提供了全面的資安可視性，有效協助 SOC 團隊偵測與應對資安威脅。",
       technologies: ["Elasticsearch Cluster", "Logstash", "Winlogbeat", "Kibana", "F5 WAF", "Fortigate", "Cisco ASA"],
