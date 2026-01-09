@@ -50,7 +50,7 @@ export const personalData = {
       title: "京城銀行-日誌集中分析管理平台",
       description: "為京城銀行構建一套全面性的資安數據監控與分析平台。整合多種資產設備日誌（如 ASA, F5 WAF, AD Event 等），透過自動化採集與解析腳本，將異質日誌數據標準化後匯入 Elasticsearch 叢集進行儲存與檢索。平台提供 Kibana Dashboards 進行實時視覺化，並支援告警引擎與戰情室功能，以提升資安事件響應效率。",
       technologies: ["Elasticsearch", "Logstash", "Kibana", "Draw.io", "Shell Script", "Go", "ASA", "F5 WAF"], // 根據SVG內容調整
-      architectureImage: "/flowcharts/ktb.svg", 
+      architectureImage: "/flowcharts/ktb.svg?v=1", 
       gallery: [
         {
           src: "/images/projects/ktb/dashboard-1.png",
