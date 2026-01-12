@@ -9,9 +9,11 @@ interface ModalProps {
   // content can be:
   // 1. Image URL (string) for static architecture images
   // 2. Render Prop function for responsive scaling ((scale: number) => React.ReactNode) for dynamic diagrams
-  content: React.ReactNode | string | ((scale: number) => React.ReactNode);
+  // 3. null (if no main content, only gallery)
+  content: React.ReactNode | string | ((scale: number) => React.ReactNode) | null;
   title: string;
   description?: string;
+  timeline?: { title: string; date: string }[];
   technologies?: string[];
   links?: {
     github?: string;
@@ -20,18 +22,19 @@ interface ModalProps {
   gallery?: (string | { src: string; caption?: string })[]; // Updated to support captions
 }
 
-export default function Modal({ isOpen, onClose, content, title, description, technologies, links, gallery }: ModalProps) {
+export default function Modal({ isOpen, onClose, content, title, description, timeline, technologies, links, gallery }: ModalProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(1);
   const [currentSlide, setCurrentSlide] = useState(0); // 0 for main content, 1+ for gallery
 
   // Total number of slides (main content + gallery images)
-  const totalSlides = (gallery?.length || 0) + 1;
+  // If content is null, totalSlides is just gallery length
+  const totalSlides = (content ? 1 : 0) + (gallery?.length || 0);
 
   // Reset slide when modal opens or closes
   useEffect(() => {
     if (isOpen) {
-      setCurrentSlide(0); // Always start with the main content (architecture diagram)
+      setCurrentSlide(0); // Always start with the first available slide
     }
   }, [isOpen]);
 
@@ -79,7 +82,10 @@ export default function Modal({ isOpen, onClose, content, title, description, te
 
   // Function to render the current slide content
   const renderSlideContent = () => {
-    if (currentSlide === 0) {
+    // If content exists, index 0 is content, 1+ are gallery
+    // If content is null, index 0+ are gallery
+    
+    if (content && currentSlide === 0) {
       // Main Content (Architecture Diagram or static image)
       if (isRenderProp) {
         return (content as (scale: number) => React.ReactNode)(scale);
@@ -97,7 +103,9 @@ export default function Modal({ isOpen, onClose, content, title, description, te
       return content as React.ReactNode; // Fallback for static React Node
     } else {
       // Gallery images
-      const item = gallery?.[currentSlide - 1];
+      // Adjust index based on whether content exists
+      const galleryIndex = content ? currentSlide - 1 : currentSlide;
+      const item = gallery?.[galleryIndex];
       const imageUrl = typeof item === 'string' ? item : item?.src;
       const caption = typeof item === 'object' ? item?.caption : null;
 
@@ -203,7 +211,8 @@ export default function Modal({ isOpen, onClose, content, title, description, te
                         {totalSlides > 1 && (
                             <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1 bg-black/50 px-3 py-1 rounded-full z-20">
                                 <span className="text-sm text-slate-200 flex items-center gap-1">
-                                    {currentSlide === 0 ? <LayoutGrid size={16} /> : <ImageIcon size={16} />}
+                                    {/* Icon Logic: If content exists, index 0 is layout grid, others are image. If no content, all are image */}
+                                    {content && currentSlide === 0 ? <LayoutGrid size={16} /> : <ImageIcon size={16} />}
                                     {currentSlide + 1} / {totalSlides}
                                 </span>
                             </div>
@@ -223,6 +232,33 @@ export default function Modal({ isOpen, onClose, content, title, description, te
                                 {description}
                             </p>
                         </div>
+
+                        {/* Timeline */}
+                        {timeline && timeline.length > 0 && (
+                          <div>
+                            <h4 className="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-4">
+                              Project Timeline
+                            </h4>
+                            <div className="relative border-l-2 border-slate-700 ml-3 space-y-6">
+                              {timeline.map((item, index) => (
+                                <div key={index} className="relative pl-6">
+                                  {/* Dot */}
+                                  <div className="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-slate-800 border-2 border-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.5)]"></div>
+                                  
+                                  {/* Content */}
+                                  <div>
+                                    <h5 className="text-slate-200 font-medium text-sm">
+                                      {item.title}
+                                    </h5>
+                                    <p className="text-slate-500 text-xs mt-1 font-mono">
+                                      {item.date}
+                                    </p>
+                                  </div>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        )}
 
                         {/* Sidebar: Tech & Links */}
                         <div className="flex flex-col gap-8">

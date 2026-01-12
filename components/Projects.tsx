@@ -7,26 +7,39 @@ import Modal from "./Modal";
 import ArchitectureDiagram from "./ArchitectureDiagram";
 import Image from "next/image";
 import { withPrefix } from "@/utils/prefix"; // Import withPrefix
+import { motion } from "framer-motion";
 
 export default function Projects() {
+  const [activeCategory, setActiveCategory] = useState("All");
+  const categories = ["All", "Enterprise", "Education", "POC", "Personal"];
+
   const [selectedProject, setSelectedProject] = useState<{
     title: string;
-    content: React.ReactNode | string | ((scale: number) => React.ReactNode);
+    content: React.ReactNode | string | ((scale: number) => React.ReactNode) | null;
     description: string;
+    timeline?: { title: string; date: string }[];
     technologies: string[];
     links?: { github?: string; link?: string };
     gallery?: (string | { src: string; caption?: string })[];
   } | null>(null);
 
+  const filteredProjects = personalData.projects.filter(project => {
+    if (activeCategory === "All") return true;
+    return project.category === activeCategory;
+  });
+
   const handleProjectClick = (project: typeof personalData.projects[0]) => {
-    let content: React.ReactNode | string | ((scale: number) => React.ReactNode) = "";
+    let content: React.ReactNode | string | ((scale: number) => React.ReactNode) | null = null;
 
     if (project.architectureImage) {
       // Use withPrefix for static architecture image
       content = withPrefix(project.architectureImage);
-    } else {
+    } else if (!project.gallery || project.gallery.length === 0) {
+        // Only use placeholder if both architectureImage and gallery are missing
         content = withPrefix("/images/architecture-demo.svg"); 
     }
+    // If architectureImage is missing but gallery exists, content remains null.
+    // Modal will handle null content by starting with gallery[0].
 
     // Process gallery images with prefix
     const galleryWithPrefix = project.gallery ? project.gallery.map(item => {
@@ -44,6 +57,7 @@ export default function Projects() {
       title: project.title,
       content: content,
       description: project.description,
+      timeline: project.timeline,
       technologies: project.technologies || [],
       links: { github: project.github, link: project.link },
       gallery: galleryWithPrefix,
@@ -53,14 +67,46 @@ export default function Projects() {
   return (
     <section id="projects" className="py-20 px-8 bg-gray-900 text-slate-200">
       <div className="container mx-auto max-w-7xl">
-        <h2 className="text-4xl font-bold text-center text-blue-400 mb-16">
+        <h2 className="text-4xl font-bold text-center text-blue-400 mb-8">
           Selected Projects
         </h2>
+
+        {/* Category Tabs */}
+        <div className="flex justify-center flex-wrap gap-4 mb-12">
+          {categories.map((category) => (
+            <button
+              key={category}
+              onClick={() => setActiveCategory(category)}
+              className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 border ${
+                activeCategory === category
+                  ? "bg-blue-600 border-blue-600 text-white shadow-lg shadow-blue-500/25"
+                  : "bg-slate-800 border-slate-700 text-slate-400 hover:bg-slate-700 hover:text-slate-200 hover:border-slate-600"
+              }`}
+            >
+              {category}
+            </button>
+          ))}
+        </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-          {personalData.projects.map((project, index) => (
-            <div
-              key={index}
+          {filteredProjects.map((project, index) => {
+            // Determine thumbnail image
+            let thumbnailSrc: string | null = null;
+            if (project.architectureImage) {
+                thumbnailSrc = withPrefix(project.architectureImage);
+            } else if (project.gallery && project.gallery.length > 0) {
+                const firstItem = project.gallery[0];
+                thumbnailSrc = typeof firstItem === 'string' ? withPrefix(firstItem) : withPrefix(firstItem.src);
+            }
+
+            return (
+            <motion.div
+              layout
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              transition={{ duration: 0.2 }}
+              key={project.title} // Use unique key for animation
               onClick={() => handleProjectClick(project)}
               className="group cursor-pointer flex flex-col gap-4"
             >
@@ -74,9 +120,9 @@ export default function Projects() {
 
                 {/* Content Render */}
                 <div className="relative w-full h-full flex items-center justify-center overflow-hidden">
-                  {project.architectureImage ? (
+                  {thumbnailSrc ? (
                     <Image
-                      src={withPrefix(project.architectureImage)} // Use withPrefix
+                      src={thumbnailSrc} // Use determined thumbnail
                       alt={project.title}
                       fill
                       className="object-contain p-4 group-hover:scale-105 transition-transform duration-500"
@@ -109,9 +155,17 @@ export default function Projects() {
                   )}
                 </div>
               </div>
-            </div>
-          ))}
+            </motion.div>
+          );
+          })}
         </div>
+        
+        {/* Empty State */}
+        {filteredProjects.length === 0 && (
+            <div className="text-center py-20 text-slate-500">
+                <p>No projects found in this category.</p>
+            </div>
+        )}
       </div>
 
       {/* Modal Component */}
@@ -121,6 +175,7 @@ export default function Projects() {
         content={selectedProject?.content || ""}
         title={selectedProject?.title || ""}
         description={selectedProject?.description}
+        timeline={selectedProject?.timeline}
         technologies={selectedProject?.technologies}
         links={selectedProject?.links}
         gallery={selectedProject?.gallery}
