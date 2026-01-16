@@ -11,7 +11,7 @@ import { motion } from "framer-motion";
 
 export default function Projects() {
   const [activeCategory, setActiveCategory] = useState("All");
-  const categories = ["All", "Enterprise", "Education", "POC", "Personal"];
+  const categories = ["All", "企業專案", "產品開發", "教育訓練", "POC", "個人專案"];
 
   const [selectedProject, setSelectedProject] = useState<{
     title: string;

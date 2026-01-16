@@ -12,22 +12,10 @@ export default function Experience() {
             <div key={index} className="mb-12">
               <div className="absolute w-3 h-3 bg-blue-500 rounded-full mt-1.5 -left-1.5 border border-slate-900"></div>
               <h3 className="text-2xl font-semibold text-slate-100 mb-1">
-                {item.title} at {item.company}
+                {item.company}
               </h3>
-              <p className="text-sm text-slate-400 mb-3">{item.years}</p>
+              <p className="text-lg text-slate-400 mb-3">{item.title} | {item.years}</p>
               <p className="text-slate-300 mb-3">{item.description}</p>
-              {item.technologies && item.technologies.length > 0 && (
-                <div className="flex flex-wrap gap-2">
-                  {item.technologies.map((tech, techIndex) => (
-                    <span
-                      key={techIndex}
-                      className="bg-blue-600/20 text-blue-300 text-xs px-2 py-1 rounded-full"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              )}
             </div>
           ))}
         </div>

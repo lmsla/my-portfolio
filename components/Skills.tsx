@@ -3,7 +3,7 @@ import { IconType } from "react-icons";
 import {
   SiPython,
   SiGo,
-  SiMysql, // Using MySQL as generic SQL icon or strictly SiPostgresql if preferred
+  SiMysql, 
   SiGnubash,
   SiDocker,
   SiKubernetes,
@@ -12,15 +12,21 @@ import {
   SiElasticsearch,
   SiGrafana,
   SiElasticstack,
+  SiAnsible,
 } from "react-icons/si";
-import { FaDatabase } from "react-icons/fa"; // Generic database icon for SQL if prefered
+import { FaDatabase } from "react-icons/fa";
+import Image from "next/image";
+import { withPrefix } from "@/utils/prefix";
 
-// Mapping string names to React Icons
-const iconMapping: { [key: string]: IconType } = {
+// Define a type that can be an IconType or a string (for image paths)
+type SkillIcon = IconType | string;
+
+// Mapping string names to React Icons or Image Paths
+const iconMapping: { [key: string]: SkillIcon } = {
   // Languages
   "Python": SiPython,
   "Golang": SiGo,
-  "SQL": FaDatabase, // Or SiMysql / SiPostgresql
+  "SQL": FaDatabase,
   "Bash": SiGnubash,
   
   // DevOps
@@ -28,13 +34,32 @@ const iconMapping: { [key: string]: IconType } = {
   "Kubernetes": SiKubernetes,
   "GitLab CI": SiGitlab,
   "ArgoCD": SiArgo,
+  "Ansible": SiAnsible,
 
-  // Data
-  "Elasticsearch": SiElasticsearch,
-
-  // Observability
-  "Grafana": SiGrafana,
+  // Data Engineering & Observability (Prioritize local SVGs for branding)
+  "Elasticsearch": "/images/logos/elasticsearch.svg",
+  "Logstash": "/images/logos/logstash.svg",
+  "Kibana": "/images/logos/kibana.svg",
+  "Beats": "/images/logos/beats.svg",
+  "Kafka": "/images/logos/kafka.svg",
+  "Grafana": SiGrafana, // Or use local if available, but SiGrafana is fine
   "ELK Stack": SiElasticstack,
+
+  // Database
+  "MySQL": SiMysql,
+  "Redis": "/images/logos/redis.svg",
+
+  // Network & Security & Infrastructure
+  "Fortinet": "/images/logos/fortinet.svg",
+  "F5": "/images/logos/f5.svg",
+  "Cisco": "/images/logos/cisco.svg",
+  "Palo Alto": "/images/logos/PaloAltoNetworks_2020_Logo.svg.png",
+  "Check Point": "/images/logos/checkpoint.png",
+  "Linux": "/images/logos/linux-tux-svgrepo-com.svg",
+  "Windows": "/images/logos/windows.svg",
+  "VMware": "/images/logos/vmware-svgrepo-com.svg",
+  "AWS": "/images/logos/aws.svg",
+  "Windows Security": "/images/logos/windows.svg", // Re-use windows logo
 };
 
 export default function Skills() {
@@ -54,17 +79,29 @@ export default function Skills() {
               
               <div className="flex flex-wrap gap-4">
                 {skills.map((skillName) => {
-                  const IconComponent = iconMapping[skillName];
+                  const IconOrPath = iconMapping[skillName];
+                  
                   return (
                     <div 
                       key={skillName}
                       className="flex items-center gap-3 bg-slate-900 px-4 py-3 rounded-lg border border-slate-700 shadow-sm hover:bg-slate-800 hover:scale-105 transition-all duration-300"
                     >
-                      {IconComponent ? (
-                        <IconComponent className="text-2xl text-blue-400" />
+                      {/* Icon Rendering Logic */}
+                      {typeof IconOrPath === 'string' ? (
+                        <div className="relative w-6 h-6">
+                           <Image 
+                             src={withPrefix(IconOrPath)} 
+                             alt={skillName} 
+                             fill 
+                             className="object-contain"
+                           />
+                        </div>
+                      ) : IconOrPath ? (
+                        <IconOrPath className="text-2xl text-blue-400" />
                       ) : (
-                        <div className="w-6 h-6 bg-slate-700 rounded-full" /> // Fallback placeholder
+                        <div className="w-6 h-6 bg-slate-700 rounded-full" /> // Fallback
                       )}
+                      
                       <span className="font-medium text-slate-300">{skillName}</span>
                     </div>
                   );
