@@ -15,7 +15,7 @@ export default function Experience() {
                 {item.company}
               </h3>
               <p className="text-lg text-slate-400 mb-3">{item.title} | {item.years}</p>
-              <p className="text-slate-300 mb-3">{item.description}</p>
+              <p className="text-slate-300 mb-3 whitespace-pre-wrap">{item.description}</p>
             </div>
           ))}
         </div>

@@ -29,19 +29,9 @@ export default function Projects() {
   });
 
   const handleProjectClick = (project: typeof personalData.projects[0]) => {
-    let content: React.ReactNode | string | ((scale: number) => React.ReactNode) | null = null;
+    let modalContent: React.ReactNode | string | ((scale: number) => React.ReactNode) | null = null;
 
-    if (project.architectureImage) {
-      // Use withPrefix for static architecture image
-      content = withPrefix(project.architectureImage);
-    } else if (!project.gallery || project.gallery.length === 0) {
-        // Only use placeholder if both architectureImage and gallery are missing
-        content = withPrefix("/images/architecture-demo.svg"); 
-    }
-    // If architectureImage is missing but gallery exists, content remains null.
-    // Modal will handle null content by starting with gallery[0].
-
-    // Process gallery images with prefix
+    // Process gallery images with prefix first
     const galleryWithPrefix = project.gallery ? project.gallery.map(item => {
         if (typeof item === 'string') {
             return withPrefix(item);
@@ -53,9 +43,21 @@ export default function Projects() {
         }
     }) : [];
 
+    // Determine the main content for the modal
+    if (project.architectureImage) {
+      modalContent = withPrefix(project.architectureImage);
+    } else if (galleryWithPrefix.length > 0) {
+      // If no architecture image, but there's a gallery, use the first gallery item as main content
+      const firstGalleryItem = galleryWithPrefix[0];
+      modalContent = typeof firstGalleryItem === 'string' ? firstGalleryItem : firstGalleryItem.src;
+    } else {
+      // Fallback if neither architectureImage nor gallery exists
+      modalContent = withPrefix("/images/architecture-demo.svg");
+    }
+
     setSelectedProject({
       title: project.title,
-      content: content,
+      content: modalContent, // Use the determined modalContent
       description: project.description,
       timeline: project.timeline,
       technologies: project.technologies || [],

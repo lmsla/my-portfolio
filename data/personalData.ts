@@ -5,9 +5,7 @@ export const personalData = {
   title: "DevOps & Data Engineer",
   tagline: "鏈接基礎設施、數據與安全，將日誌轉化為深度洞見。",
   about: [
-    "專精於數據驅動的 DevOps 與資安工程，擅長以 Elastic Stack (ELK) 為核心，為企業打造高效能、高韌性的數據觀測平台。擁有豐富的 SIEM 系統建置經驗，能整合並分析來自多種異質環境（如 Windows AD、網路防火牆、Linux 系統）的日誌數據，並將其轉化為具備實戰價值的資安洞察。",
-    "熟悉以 Golang、Python 等語言開發後端服務與自動化腳本，並具備 Docker、Kubernetes 等容器化技術的實戰經驗，能協助企業實踐 CI/CD，並建構可擴展、易於維運的系統架構。",
-    "不僅專注於技術，更致力於將技術與業務需求相結合，透過數據視覺化與機器學習，協助企業發掘數據中的潛在價值，並為資安決策提供關鍵依據。",
+    "專精於 Elastic Stack (ELK) 大數據平台建置與效能調優，擁有豐富的 SIEM 與日誌分析架構經驗。在管理異質環境與大規模數據的過程中，主動導入 DevOps 思維，利用 Golang 開發自動化維運工具 (如索引生命週期管理)，並推動 Docker 容器化與 GitLab CI 流程，致力於透過『程式碼化』與『自動化』手段，解決複雜的數據維運挑戰，提升系統可靠性。",
   ],
   contact: {
     email: "your.email@example.com",
@@ -23,10 +21,10 @@ export const personalData = {
   },
   experience: [
     {
-      title: "數據工程師 & DevOps 工程師",
-      company: "BiMap 集先鋒科技",
+      title: "數據工程師",
+      company: "BiMAP 集先鋒科技",
       years: "2021/04 - Present",
-      description: "",
+      description: "• 核心系統研發：企業級 SIEM 平台建置，運用 Elastic Stack 整合異質數據源，解決資安監控需求.\n• 自動化工具開發：以 Golang 自研高效能維運工具（如 ES ILM 管理、自動化報表），解決索引管理與數據可視化痛點.\n• DevOps 實踐：導入 Docker 容器化與 GitLab CI/CD 流程，建立標準化部署規範，提升交付效率.\n• 專案交付：負責多個大型客戶（金融、電信、製造）的架構規劃與效能調優，並執行技術轉移與教育訓練.",
       technologies: ["Elasticsearch", "Kibana", "Python", "Golang", "Docker", "Kubernetes", "Ansible"],
     },
     {
@@ -46,10 +44,21 @@ export const personalData = {
   ],
   projects: [
     {
+      title: "ES Housekeeping 索引管理＆Cluster監控",
+      category: "產品開發",
+      description: "• 設計並開發企業級 ES 索引自動化維運服務,解決索引累積造成的儲存成本與人工負擔\n• 以 Go 語言開發,支援 Systemd 服務化部署、內建 Cron 排程\n核心功能\n• 索引生命週期管理:自動清理(Delete)過期索引、Force Merge 優化、Close/Open 歸檔控制\n• 智慧分層儲存:自動遷移索引 (Allocation),優化儲存成本\n• 多維度過濾策略:支援時間 (Age)、名稱匹配 (Pattern)、容量上限 (Space)、磁碟水位線 (Water Level) 等條件組合\n• Rollover 滾動管理:基於Alias 的索引自動輪轉,適用於時間序列資料場景\n• 叢集健康即時監控:追蹤 Cluster 狀態、Unassigned Shards、節點數量\n• 系統索引保護:自動排除 kibana.security.monitoring-*等關鍵索引\n• Test Mode (Dry-Run):預覽模式驗證配置正確性,確保上線零風險",
+      technologies: ["Elasticsearch", "Kibana", "Grafana", "Go", "Docker", "Systemd"],
+      architectureImage: "/flowcharts/housekeeping.svg",
+      gallery: [
+        { src: "/images/projects/housekeeping/disks.png", caption: "Elasticsearch 叢集磁碟使用率監控" },
+        { src: "/images/projects/housekeeping/shards.png", caption: "Elasticsearch 叢集 Shard 分佈與狀態監控" },
+      ],
+    },
+    {
       title: "Report Automation Platform 自動化報表平台",
       category: "產品開發",
       description: "• 設計並實作企業級報表自動化系統，支援 Kibana 儀表板截圖與 Elasticsearch 數據查詢自訂表格並產出 PDF 報表\n• 導入策略模式 (Strategy Pattern) 實現 Keycloak SSO 與 RADIUS 雙重認證機制切換\n• 使用 ChromeDP 無頭瀏覽器技術，實現高品質網頁截圖與自動化擷取\n• 建立 Cron-based 排程系統，支援客製化報表定時產出與郵件自動寄送\n• 實作完整的健康檢查 API，監控 MySQL、前端服務及 Keycloak 認證服務狀態\n• 設計 RESTful API (64 端點)，並整合 Swagger 自動生成 API 文檔\n• 建立 Docker 容器化部署流程，配合 GitLab CI/CD 實現自動化部署",
-      technologies: ["Go", "Gin", "Docker", "Kubernetes", "GitLab CI", "MySQL", "Keycloak", "RADIUS", "Grafana", "Kibana", "Swagger", "RESTful API", "ChromeDP"],
+      technologies: ["Go", "Gin", "GitLab CI", "MySQL", "Keycloak", "RADIUS", "Grafana", "Kibana", "Swagger", "RESTful API", "ChromeDP"],
       architectureImage: "/flowcharts/report.svg",
     },
     {
@@ -93,7 +102,7 @@ export const personalData = {
         { title: "建置期", date: "2022/01 - 2022/06" },
         { title: "維護期", date: "2022/06 - Present" },
       ],
-      technologies: ["Elasticsearch Cluster", "Logstash", "Winlogbeat", "Kibana", "F5 WAF", "Fortigate", "Cisco ASA"],
+      technologies: ["Elasticsearch", "Logstash", "Winlogbeat", "Kibana", "F5 WAF", "Fortigate", "Cisco ASA"],
       architectureImage: "/flowcharts/walsin.svg",
       // Add gallery images here
       gallery: [
@@ -227,3 +236,5 @@ export const personalData = {
     },
   ],
 };
+
+
