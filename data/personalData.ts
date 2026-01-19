@@ -83,7 +83,7 @@ export const personalData = {
         { title: "建置期", date: "2024/09 - 2024/11" },
         { title: "維護期", date: "2024/11 - Present" },
       ],
-      description: "為宏遠證券建置全方位的資安事件管理平台。整合多種異質日誌源（包括 Windows AD、防火牆、Linux 系統等），透過視覺化儀表板即時監控資安威脅與系統健康狀態，提升資安維運效率。\n系統上線後負責為企業提供6小時的教育訓練&技術交流。",
+      description: "為宏遠證券建置全方位的資安事件管理平台。整合多種異質日誌源（包括 Windows AD、防火牆、Linux 系統等），透過視覺化儀表板即時監控資安威脅與系統健康狀態，提升資安維運效率。\n系統上線後負責為企業提供6小時的教育訓練，進行知識移轉，縮短企業自主運維學習曲線，提升系統穩定性。",
       technologies: ["Elasticsearch", "Logstash", "Kibana", "Windows AD", "Fortigate", "Linux"],
       architectureImage: "/flowcharts/honsec.svg",
       gallery: [
@@ -104,7 +104,7 @@ export const personalData = {
     {
       title: "華新麗華-SIEM 資訊安全事件管理平台",
       category: "企業專案",
-      description: "為華新麗華集團設計並實施集中式資安資訊與事件管理 (SIEM) 數據平台。該平台透過 Winlogbeat 從 Windows AD 伺服器以及從 F5 WAF、Fortigate、Cisco ASA、Citrix 等關鍵網路安全設備，即時採集日誌數據，並匯入強大的 Logstash 處理管線進行解析與豐富化。架構設計採用高可用性的 Elasticsearch 叢集，分層儲存為 Hot-Warm 節點，以優化近期數據的查詢效能並確保成本效益的長期資料保存。透過客製化的 Kibana 儀表板，提供了全面的資安可視性，有效協助 SOC 團隊偵測與應對資安威脅。\n系統上線後負責為企業提供6小時的教育訓練&技術交流。",
+      description: "為華新麗華集團設計並實施集中式資安資訊與事件管理 (SIEM) 數據平台。該平台透過 Winlogbeat 從 Windows AD 伺服器以及從 F5 WAF、Fortigate、Cisco ASA、Citrix 等關鍵網路安全設備，即時採集日誌數據，並匯入強大的 Logstash 處理管線進行解析與豐富化。架構設計採用高可用性的 Elasticsearch 叢集，分層儲存為 Hot-Warm 節點，以優化近期數據的查詢效能並確保成本效益的長期資料保存。透過客製化的 Kibana 儀表板，提供了全面的資安可視性，有效協助 SOC 團隊偵測與應對資安威脅。\n系統上線後負責為企業提供6小時的教育訓練，進行知識移轉，縮短企業自主運維學習曲線，提升系統穩定性。",
       timeline: [
         { title: "建置期", date: "2022/01 - 2022/06" },
         { title: "維護期", date: "2022/06 - Present" },
@@ -125,7 +125,7 @@ export const personalData = {
     {
       title: "京城銀行-日誌集中分析管理平台",
       category: "企業專案",
-      description: "為京城銀行構建一套全面性的資安數據監控與分析平台。整合多種資產設備日誌（如 ASA, F5 WAF, AD Event 等），透過自動化採集與解析腳本，將異質日誌數據標準化後匯入 Elasticsearch 叢集進行儲存與檢索。平台提供 Kibana Dashboards 進行實時視覺化，並支援告警引擎與戰情室功能，以提升資安事件響應效率。",
+      description: "為京城銀行構建一套全面性的資安數據監控與分析平台。整合多種資產設備日誌（如 ASA, F5 WAF, AD Event 等），透過自動化採集與解析腳本，將異質日誌數據標準化後匯入 Elasticsearch 叢集進行儲存與檢索。平台提供 Kibana Dashboards 進行實時視覺化，並支援告警引擎與戰情室功能，以提升資安事件響應效率。\n系統上線後負責為企業提供6小時的教育訓練，進行知識移轉，縮短企業自主運維學習曲線，提升系統穩定性。",
       timeline: [
         { title: "建置期", date: "2022/03 - 2022/10" },
         { title: "維護期", date: "2022/10 - Present" },
@@ -147,7 +147,7 @@ export const personalData = {
     {
       title: "台泥集團日誌系統汰換專案",
       category: "企業專案",
-      description: "為台泥集團建置基於 ELK Stack 的大數據資安分析平台，汰換舊有系統以提升資安偵測效能。專案橫跨總處與關企，採用高可用性 Elasticsearch 叢集與 Redis 緩衝架構，整合超過 20 種異質日誌源（如 Firewall, AD, Linux, DB）。透過 Logstash 進行數據正規化，並客製化 Kibana 儀表板實現流量分析、威脅偵測等資安可視化，結合自動化告警機制，強化集團整體資安維運監控。\n專案建置完成後主導6小時企業內部教育訓練，進行知識移轉，縮短企業自主運維學習曲線，提升系統穩定性",
+      description: "為台泥集團建置基於 ELK Stack 的大數據資安分析平台，汰換舊有系統以提升資安偵測效能。專案橫跨總處與關企，採用高可用性 Elasticsearch 叢集與 Redis 緩衝架構，整合超過 20 種異質日誌源（如 Firewall, AD, Linux, DB）。透過 Logstash 進行數據正規化，並客製化 Kibana 儀表板實現流量分析、威脅偵測等資安可視化，結合自動化告警機制，強化集團整體資安維運監控。\n系統上線後負責為企業提供6小時的教育訓練，進行知識移轉，縮短企業自主運維學習曲線，提升系統穩定性。",
       timeline: [
         { title: "建置期", date: "2024/04 - 2024/08" },
         { title: "維護期", date: "2024/08 - Present" },
@@ -168,9 +168,13 @@ export const personalData = {
     {
       title: "政府情治單位-日誌集中分析管理平台",
       category: "企業專案",
-      description: "為政府情治單位建置高度安全的日誌集中分析平台。整合多維度的網路設備與系統日誌，透過自定義的解析規則與關聯分析，強化威脅偵測能力。架構設計強調高可用性與數據加密，確保敏感資訊的儲存與傳輸安全。",
+      description: "為政府情治單位建置高度安全的日誌集中分析平台。整合多維度的網路設備與系統日誌，透過自定義的解析規則與關聯分析，強化威脅偵測能力。架構設計強調高可用性與數據加密，確保敏感資訊的儲存與傳輸安全。\n系統上線後負責提供6小時的教育訓練，進行知識移轉，縮短企業自主運維學習曲線，提升系統穩定性。",
       technologies: ["Elasticsearch", "Logstash", "Kibana", "Beats", "Linux Security"],
       architectureImage: "/flowcharts/nsb.svg",
+      timeline: [
+        { title: "建置期", date: "2024/12 - 2025/05" },
+        { title: "維護期", date: "2025/05 - Present" },
+      ],
       gallery: [],
     },
     {
