@@ -4,7 +4,6 @@ import { personalData } from "@/data/personalData";
 import { Award, BookOpen, ExternalLink, X } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
-import { withPrefix } from "@/utils/prefix";
 
 export default function Certificates() {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
@@ -58,10 +57,10 @@ export default function Certificates() {
               {(cert as any).image && (
                 <div 
                   className="relative w-32 sm:w-40 shrink-0 border-l border-slate-700 overflow-hidden cursor-pointer bg-slate-900"
-                  onClick={() => setSelectedImage(withPrefix((cert as any).image))}
+                  onClick={() => setSelectedImage((cert as any).image)}
                 >
                   <Image
-                    src={withPrefix((cert as any).image)}
+                    src={(cert as any).image}
                     alt={cert.name}
                     fill
                     className="object-cover opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500"

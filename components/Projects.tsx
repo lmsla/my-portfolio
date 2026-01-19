@@ -6,7 +6,7 @@ import { Github, Link as LinkIcon, Lock, Maximize2 } from "lucide-react";
 import Modal from "./Modal";
 import ArchitectureDiagram from "./ArchitectureDiagram";
 import Image from "next/image";
-import { withPrefix } from "@/utils/prefix"; // Import withPrefix
+// withPrefix removed as it's not needed for next/image with basePath
 import { motion } from "framer-motion";
 
 export default function Projects() {
@@ -31,38 +31,32 @@ export default function Projects() {
   const handleProjectClick = (project: typeof personalData.projects[0]) => {
     let modalContent: React.ReactNode | string | ((scale: number) => React.ReactNode) | null = null;
 
-    // Process gallery images with prefix first
-    const galleryWithPrefix = project.gallery ? project.gallery.map(item => {
-        if (typeof item === 'string') {
-            return withPrefix(item);
-        } else {
-            return {
-                ...item,
-                src: withPrefix(item.src)
-            };
-        }
-    }) : [];
+    // Pass gallery images directly, next/image handles basePath
+    const gallery = project.gallery || [];
 
     // Determine the main content for the modal
     if (project.architectureImage) {
-      modalContent = withPrefix(project.architectureImage);
-    } else if (galleryWithPrefix.length > 0) {
+      // For string paths passed to next/image, do not use withPrefix
+      modalContent = project.architectureImage;
+    } else if (gallery.length > 0) {
       // If no architecture image, but there's a gallery, use the first gallery item as main content
-      const firstGalleryItem = galleryWithPrefix[0];
+      const firstGalleryItem = gallery[0];
       modalContent = typeof firstGalleryItem === 'string' ? firstGalleryItem : firstGalleryItem.src;
     } else {
-      // Fallback if neither architectureImage nor gallery exists
-      modalContent = withPrefix("/images/architecture-demo.svg");
+      // Fallback architecture image
+      // Note: This fallback might need explicit handling if it's not in public/
+      // Assuming /images/architecture-demo.svg exists in public
+      modalContent = "/images/architecture-demo.svg";
     }
 
     setSelectedProject({
       title: project.title,
-      content: modalContent, // Use the determined modalContent
+      content: modalContent,
       description: project.description,
       timeline: project.timeline,
       technologies: project.technologies || [],
       links: { github: project.github, link: project.link },
-      gallery: galleryWithPrefix,
+      gallery: gallery,
     });
   };
 
@@ -95,10 +89,10 @@ export default function Projects() {
             // Determine thumbnail image
             let thumbnailSrc: string | null = null;
             if (project.architectureImage) {
-                thumbnailSrc = withPrefix(project.architectureImage);
+                thumbnailSrc = project.architectureImage;
             } else if (project.gallery && project.gallery.length > 0) {
                 const firstItem = project.gallery[0];
-                thumbnailSrc = typeof firstItem === 'string' ? withPrefix(firstItem) : withPrefix(firstItem.src);
+                thumbnailSrc = typeof firstItem === 'string' ? firstItem : firstItem.src;
             }
 
             return (
@@ -124,7 +118,7 @@ export default function Projects() {
                 <div className="relative w-full h-full flex items-center justify-center overflow-hidden">
                   {thumbnailSrc ? (
                     <Image
-                      src={thumbnailSrc} // Use determined thumbnail
+                      src={thumbnailSrc} // Use determined thumbnail without extra prefix
                       alt={project.title}
                       fill
                       className="object-contain p-4 group-hover:scale-105 transition-transform duration-500"
