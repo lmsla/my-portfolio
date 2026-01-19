@@ -29,8 +29,6 @@ export default function Projects() {
   });
 
   const handleProjectClick = (project: typeof personalData.projects[0]) => {
-    let modalContent: React.ReactNode | string | ((scale: number) => React.ReactNode) | null = null;
-
     // Process gallery images with prefix first
     const galleryWithPrefix = project.gallery ? project.gallery.map(item => {
         if (typeof item === 'string') {
@@ -44,25 +42,18 @@ export default function Projects() {
     }) : [];
 
     // Determine the main content for the modal
-    if (project.architectureImage) {
-      modalContent = withPrefix(project.architectureImage);
-    } else if (galleryWithPrefix.length > 0) {
-      // If no architecture image, but there's a gallery, use the first gallery item as main content
-      const firstGalleryItem = galleryWithPrefix[0];
-      modalContent = typeof firstGalleryItem === 'string' ? firstGalleryItem : firstGalleryItem.src;
-    } else {
-      // Fallback if neither architectureImage nor gallery exists
-      modalContent = withPrefix("/images/architecture-demo.svg");
-    }
+    // If architectureImage exists, it becomes the first slide (index 0)
+    // If not, we set content to null and let the modal start with gallery[0]
+    const modalContent = project.architectureImage ? withPrefix(project.architectureImage) : null;
 
     setSelectedProject({
       title: project.title,
-      content: modalContent, // Use the determined modalContent
+      content: modalContent,
       description: project.description,
       timeline: project.timeline,
       technologies: project.technologies || [],
       links: { github: project.github, link: project.link },
-      gallery: galleryWithPrefix,
+      gallery: galleryWithPrefix, // Always pass the full gallery
     });
   };
 

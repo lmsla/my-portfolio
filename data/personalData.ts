@@ -6,7 +6,9 @@ export const personalData = {
   title: "Data Engineer & DevOps",
   tagline: "鏈接基礎設施、數據與安全，將日誌轉化為深度洞見。",
   about: [
-    "專精於 Elastic Stack (ELK) 大數據平台建置與效能調優，擁有豐富的 SIEM 與日誌分析架構經驗。在管理異質環境與大規模數據的過程中，主動導入 DevOps 思維，利用 Golang 開發自動化維運工具 (如索引生命週期管理)，並推動 Docker 容器化與 GitLab CI 流程，致力於透過『程式碼化』與『自動化』手段，解決複雜的數據維運挑戰，提升系統可靠性。",
+    "專精於 Elastic Stack (ELK) 大數據平台建置與效能調優，擁有 5 年軟體開發、數據工程及豐富的 SIEM 與日誌分析架構經驗 ; 參與及擔任台泥集團、華新麗華等大型企業專案之技術負責人。",                                                                                     
+    "在管理異質環境與大規模數據的過程中，主導開發多項自動化產品(如索引生命週期管理)以解決維運痛點，大幅降低人工維護成本。在管理大規模數據的同時，積極導入DevOps 文化與容器化技術。",                 
+    "致力於將繁瑣的維運流程轉化為高效的自動化服務，透過程式碼解決數據治理難題，為企業構建高韌性、可擴展的系統架構。",
   ],
   contact: {
     email: "rabot6201@gmail.com",
@@ -22,7 +24,7 @@ export const personalData = {
   },
   experience: [
     {
-      title: "數據工程師",
+      title: "數據工程師 / ELK 原廠代理商技術工程師",
       company: "BiMAP 集先鋒科技",
       years: "2021/04 - Present",
       description: "• 核心系統研發：企業級 SIEM 平台建置，運用 Elastic Stack 整合異質數據源，解決資安監控需求.\n• 自動化工具開發：以 Golang 自研高效能維運工具（如 ES ILM 管理、自動化報表），解決索引管理與數據可視化痛點.\n• DevOps 實踐：導入 Docker 容器化與 GitLab CI/CD 流程，建立標準化部署規範，提升交付效率.\n• 專案交付：負責多個大型客戶（金融、電信、製造）的架構規劃與效能調優，並執行技術轉移與教育訓練.",
@@ -58,7 +60,7 @@ export const personalData = {
     {
       title: "Report Automation Platform 自動化報表平台",
       category: "產品開發",
-      description: "• 設計並實作企業級報表自動化系統，支援 Kibana 儀表板截圖與 Elasticsearch 數據查詢自訂表格並產出 PDF 報表\n• 導入策略模式 (Strategy Pattern) 實現 Keycloak SSO 與 RADIUS 雙重認證機制切換\n• 使用 ChromeDP 無頭瀏覽器技術，實現高品質網頁截圖與自動化擷取\n• 建立 Cron-based 排程系統，支援客製化報表定時產出與郵件自動寄送\n• 實作完整的健康檢查 API，監控 MySQL、前端服務及 Keycloak 認證服務狀態\n• 設計 RESTful API (64 端點)，並整合 Swagger 自動生成 API 文檔\n• 建立 Docker 容器化部署流程，配合 GitLab CI/CD 實現自動化部署",
+      description: "• 設計並實作企業級報表自動化系統，支援 Kibana 儀表板截圖與 Elasticsearch 數據查詢自訂表格並產出 PDF 報表\n• 導入策略模式 (Strategy Pattern) 實現 Keycloak SSO 與 RADIUS 雙重認證機制切換\n• 使用 ChromeDP 無頭瀏覽器技術，實現高品質網頁截圖與自動化擷取\n• 建立 Cron-based 排程系統，支援客製化報表定時產出與郵件自動寄送\n• 實作完整的健康檢查 API，監控 MySQL、後端服務及 Keycloak 認證服務狀態\n• 設計 RESTful API (64 端點)，並整合 Swagger 自動生成 API 文檔\n• 建立 Docker 容器化部署流程，配合 GitLab CI/CD 實現自動化部署",
       technologies: ["Go", "Gin", "GitLab CI", "MySQL", "Keycloak", "RADIUS", "Grafana", "Kibana", "Swagger", "RESTful API", "ChromeDP"],
       architectureImage: "/flowcharts/report.svg",
     },
