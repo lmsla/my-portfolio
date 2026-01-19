@@ -2,8 +2,8 @@
 
 import { personalData } from "@/data/personalData";
 import { Award, BookOpen, ExternalLink, X } from "lucide-react";
-import Image from "next/image";
 import { useState } from "react";
+import { withPrefix } from "@/utils/prefix";
 
 export default function Certificates() {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
@@ -59,11 +59,10 @@ export default function Certificates() {
                   className="relative w-32 sm:w-40 shrink-0 border-l border-slate-700 overflow-hidden cursor-pointer bg-slate-900"
                   onClick={() => setSelectedImage((cert as any).image)}
                 >
-                  <Image
-                    src={(cert as any).image}
+                  <img
+                    src={withPrefix((cert as any).image)}
                     alt={cert.name}
-                    fill
-                    className="object-cover opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500"
+                    className="object-cover w-full h-full opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500"
                   />
                   <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/40">
                     <span className="text-white text-[10px] bg-blue-600/80 px-2 py-0.5 rounded shadow-sm">VIEW</span>
@@ -87,12 +86,11 @@ export default function Certificates() {
           >
             <X size={40} />
           </button>
-          <div className="relative w-full h-full max-w-5xl max-h-[90vh]">
-            <Image
-              src={selectedImage}
+          <div className="relative w-full h-full max-w-5xl max-h-[90vh] flex items-center justify-center">
+            <img
+              src={withPrefix(selectedImage)}
               alt="Certificate Preview"
-              fill
-              className="object-contain"
+              className="object-contain max-w-full max-h-full"
             />
           </div>
         </div>

@@ -1,7 +1,7 @@
-import Image from "next/image";
 import Link from "next/link";
 import { Github, Linkedin, Mail } from "lucide-react";
 import { personalData } from "@/data/personalData";
+import { withPrefix } from "@/utils/prefix";
 
 export default function Hero() {
   return (
@@ -52,12 +52,10 @@ export default function Hero() {
         {/* Right Side: Image/Avatar */}
         <div className="relative w-72 h-72 md:w-96 md:h-96 rounded-full overflow-hidden shadow-2xl border-4 border-blue-400 z-10 flex items-center justify-center bg-slate-800 shrink-0">
           {personalData.profileImage ? (
-            <Image
-              src={personalData.profileImage}
+            <img
+              src={withPrefix(personalData.profileImage)}
               alt={personalData.name}
-              fill
-              className="object-cover"
-              priority
+              className="object-cover w-full h-full"
             />
           ) : (
             <span className="text-slate-400 text-sm">Your Photo Here</span>
