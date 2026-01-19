@@ -1,21 +1,22 @@
 // data/personalData.ts
 
 export const personalData = {
-  name: "Russell Chen",
-  title: "DevOps & Data Engineer",
+  name: "Russell 陳志銓",
+  profileImage: "/images/projects/portfolio/russell_photo.jpg",
+  title: "Data Engineer & DevOps",
   tagline: "鏈接基礎設施、數據與安全，將日誌轉化為深度洞見。",
   about: [
     "專精於 Elastic Stack (ELK) 大數據平台建置與效能調優，擁有豐富的 SIEM 與日誌分析架構經驗。在管理異質環境與大規模數據的過程中，主動導入 DevOps 思維，利用 Golang 開發自動化維運工具 (如索引生命週期管理)，並推動 Docker 容器化與 GitLab CI 流程，致力於透過『程式碼化』與『自動化』手段，解決複雜的數據維運挑戰，提升系統可靠性。",
   ],
   contact: {
-    email: "your.email@example.com",
+    email: "rabot6201@gmail.com",
     github: "https://github.com/lmsla",
     linkedin: "https://www.linkedin.com/in/your-linkedin-profile",
   },
   skills: {
     languages: ["Python", "Golang", "SQL", "Bash"],
     devops: ["Docker", "Kubernetes", "GitLab CI", "ArgoCD", "Ansible"],
-    dataEngineering: ["Elasticsearch", "Logstash", "Kibana", "Beats", "Kafka"],
+    dataEngineering: ["Elasticsearch", "Logstash", "Kibana", "Beats"],
     database: ["MySQL", "Redis"],
     networkSecurity: ["Fortinet", "F5", "Cisco", "Palo Alto", "Linux", "Windows"],
   },
@@ -108,7 +109,6 @@ export const personalData = {
       ],
       technologies: ["Elasticsearch", "Logstash", "Winlogbeat", "Kibana", "F5 WAF", "Fortigate", "Cisco ASA"],
       architectureImage: "/flowcharts/walsin.svg",
-      // Add gallery images here
       gallery: [
         {
           src: "/images/projects/walsin/dashboard-1.jpeg",
@@ -118,9 +118,7 @@ export const personalData = {
           src: "/images/projects/walsin/virus-dashboard.jpeg",
           caption: "Virus 病毒威脅統計",
         },
-        // If you have more screenshots, add their paths here, e.g., "/images/projects/walsin/dashboard-2.jpeg"
       ],
-      // Custom architecture component is rendered for this project title in Projects.tsx
     },
     {
       title: "京城銀行-日誌集中分析管理平台",
@@ -142,7 +140,7 @@ export const personalData = {
           caption: "Cisco ASA 流量統計儀表板",
         },
 
-      ], // 暫無截圖
+      ],
     },
     {
       title: "台泥集團日誌系統汰換專案",
@@ -164,7 +162,6 @@ export const personalData = {
           caption: "FortiGate 流量分析儀表板",
         },
       ],
-      // No github link
     },
     {
       title: "政府情治單位-日誌集中分析管理平台",
@@ -225,26 +222,53 @@ export const personalData = {
       ]
     },
     {
-      title: "Personal Portfolio Website",
-      category: "Personal",
-      description: "Designed and developed a modern, responsive portfolio website using Next.js and Tailwind CSS. Implemented a fully automated CI/CD pipeline using GitHub Actions to build and deploy to GitHub Pages.",
+      title: "個人化雲端履歷網站",
+      category: "個人專案",
+      description: "設計並開發基於 Next.js 與 Tailwind CSS 的現代化響應式履歷網站。透過 GitHub Actions 建立完整的自動化 CI/CD 流水線，實現程式碼推送後的自動化建置與 GitHub Pages 靜態部署。",
       technologies: ["Next.js", "TypeScript", "Tailwind CSS", "GitHub Actions"],
-      github: "https://github.com/lmsla/my-portfolio", // This is your actual repo!
+      architectureImage: "/images/projects/portfolio/home.png",
+      github: "https://github.com/lmsla/my-portfolio", 
       link: "https://lmsla.github.io/my-portfolio/",
     },
   ],
   certificates: [
     {
+      name: "使用 Google Cloud 進行 AI 與機器學習的基礎介紹",
+      issuer: "Google Cloud",
+      date: "2025/05",
+      link: "/certificates/google_cloud.png",
+      image: "/certificates/google_cloud.png",
+      type: "course",
+    },
+    {
+      name: "Google Cloud 數位人才探索計畫",
+      issuer: "Google Cloud Skills Boost",
+      date: "2025/09",
+      link: "https://www.skills.google/public_profiles/2d0cb200-9b48-4f6b-8470-e30b3a10dadb",
+      image: "/certificates/CertificateOfCompletionGoogleCloud.png",
+      type: "course",
+    },
+    {
+      name: "開發人員的 Kubernetes：取得 CKAD 國際認證",
+      issuer: "iSpan",
+      date: "2025/07",
+      link: "/certificates/CKAD.png",
+      image: "/certificates/CKAD.png",
+      type: "course",
+    },
+    {
       name: "Elastic Certified Engineer",
       issuer: "Elastic",
       date: "202X",
       link: "#",
+      type: "certification",
     },
     {
       name: "Certified Kubernetes Administrator (CKA)",
       issuer: "CNCF",
       date: "202X",
       link: "#",
+      type: "certification",
     },
   ],
 };

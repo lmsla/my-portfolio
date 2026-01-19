@@ -24,16 +24,16 @@ type SkillIcon = IconType | string;
 // Mapping string names to React Icons or Image Paths
 const iconMapping: { [key: string]: SkillIcon } = {
   // Languages
-  "Python": SiPython,
-  "Golang": SiGo,
+  "Python": "/images/logos/python.svg",
+  "Golang": "/images/logos/go.svg",
   "SQL": FaDatabase,
   "Bash": SiGnubash,
   
   // DevOps
-  "Docker": SiDocker,
+  "Docker": "/images/logos/docker.svg",
   "Kubernetes": SiKubernetes,
-  "GitLab CI": SiGitlab,
-  "ArgoCD": SiArgo,
+  "GitLab CI": "/images/logos/gitlab.svg",
+  "ArgoCD": "/images/logos/argocd.svg",
   "Ansible": SiAnsible,
 
   // Data Engineering & Observability (Prioritize local SVGs for branding)
@@ -41,7 +41,6 @@ const iconMapping: { [key: string]: SkillIcon } = {
   "Logstash": "/images/logos/logstash.svg",
   "Kibana": "/images/logos/kibana.svg",
   "Beats": "/images/logos/beats.svg",
-  "Kafka": "/images/logos/kafka.svg",
   "Grafana": SiGrafana, // Or use local if available, but SiGrafana is fine
   "ELK Stack": SiElasticstack,
 
