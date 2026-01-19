@@ -76,7 +76,11 @@ export const personalData = {
     {
       title: "宏遠證券SIEM平台建置專案",
       category: "企業專案",
-      description: "為宏遠證券建置全方位的資安事件管理平台。整合多種異質日誌源（包括 Windows AD、防火牆、Linux 系統等），透過視覺化儀表板即時監控資安威脅與系統健康狀態，提升資安維運效率。",
+      timeline: [
+        { title: "建置期", date: "2024/09 - 2024/11" },
+        { title: "維護期", date: "2024/11 - Present" },
+      ],
+      description: "為宏遠證券建置全方位的資安事件管理平台。整合多種異質日誌源（包括 Windows AD、防火牆、Linux 系統等），透過視覺化儀表板即時監控資安威脅與系統健康狀態，提升資安維運效率。\n系統上線後負責為企業提供6小時的教育訓練&技術交流。",
       technologies: ["Elasticsearch", "Logstash", "Kibana", "Windows AD", "Fortigate", "Linux"],
       architectureImage: "/flowcharts/honsec.svg",
       gallery: [
@@ -97,7 +101,7 @@ export const personalData = {
     {
       title: "華新麗華-SIEM 資訊安全事件管理平台",
       category: "企業專案",
-      description: "為華新麗華集團設計並實施集中式資安資訊與事件管理 (SIEM) 數據平台。該平台透過 Winlogbeat 從 Windows AD 伺服器以及從 F5 WAF、Fortigate、Cisco ASA、Citrix 等關鍵網路安全設備，即時採集日誌數據，並匯入強大的 Logstash 處理管線進行解析與豐富化。架構設計採用高可用性的 Elasticsearch 叢集，分層儲存為 Hot-Warm 節點，以優化近期數據的查詢效能並確保成本效益的長期資料保存。透過客製化的 Kibana 儀表板，提供了全面的資安可視性，有效協助 SOC 團隊偵測與應對資安威脅。",
+      description: "為華新麗華集團設計並實施集中式資安資訊與事件管理 (SIEM) 數據平台。該平台透過 Winlogbeat 從 Windows AD 伺服器以及從 F5 WAF、Fortigate、Cisco ASA、Citrix 等關鍵網路安全設備，即時採集日誌數據，並匯入強大的 Logstash 處理管線進行解析與豐富化。架構設計採用高可用性的 Elasticsearch 叢集，分層儲存為 Hot-Warm 節點，以優化近期數據的查詢效能並確保成本效益的長期資料保存。透過客製化的 Kibana 儀表板，提供了全面的資安可視性，有效協助 SOC 團隊偵測與應對資安威脅。\n系統上線後負責為企業提供6小時的教育訓練&技術交流。",
       timeline: [
         { title: "建置期", date: "2022/01 - 2022/06" },
         { title: "維護期", date: "2022/06 - Present" },
@@ -109,6 +113,10 @@ export const personalData = {
         {
           src: "/images/projects/walsin/dashboard-1.jpeg",
           caption: "Cisco ASA Traffic 流量即時監控",
+        },
+        {
+          src: "/images/projects/walsin/virus-dashboard.jpeg",
+          caption: "Virus 病毒威脅統計",
         },
         // If you have more screenshots, add their paths here, e.g., "/images/projects/walsin/dashboard-2.jpeg"
       ],
@@ -127,7 +135,11 @@ export const personalData = {
       gallery: [
         {
           src: "/images/projects/ktb/dashboard-1.png",
-          caption: "IPS攻擊來源每月統計",
+          caption: "客製化報表 - IPS攻擊來源每月統計",
+        },
+        {
+          src: "/images/projects/ktb/cisco-traffic.jpeg",
+          caption: "Cisco ASA 流量統計儀表板",
         },
 
       ], // 暫無截圖
@@ -182,7 +194,7 @@ export const personalData = {
     },
     {
       title: "台泥集團ELK Enterprise 授權 POC",
-      category: "POC",
+      category: "企業專案",
       description: "主導 TCCI 企業級 Elastic ELK 平台授權 POC，建置完整資安威脅偵測體系，整合 Security SIEM、Machine Learning 異常偵測與 LLM AI 分析三大模組。成功部署 28 個 ML 異常偵測任務，處理 6.5 億筆記錄，建立使用者行為基線，實時識別高風險事件。\n核心成果：\n1.Security 規則引擎：導入 1411 條官方規則 + 7 條自定義規則，監控 AD/VPN/SSH/LDAP/WMI 攻擊，生成 817 則告警，Attack Discovery 自動關聯暴力破解 → Fortigate 特權存取攻擊鏈 。\n2.開發ML異常偵測精準模型如：Windows AD罕見IP登入、Forti VPN 非典型區域、機敏資料操作\n3.AI 輔助決策：整合 Gemini 2.5，自動生成 5 項應對建議（MFA、重設密碼、IP 封鎖）。\n4.技術貢獻：配置 62.8GB ML 叢集，實現小時級告警（含 KQL 驗證連結），提升資安響應速度 80%，模型精度隨 6.5 億筆數據持續優化。驗證 POC 降低資安事件 MTTR 從天級至小時級，證明企業級部署可行性。",
       technologies: ["Elasticsearch Enterprise", "AI Assistant", "Machine Learning", "SIEM"],
       gallery: [
