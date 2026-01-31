@@ -41,6 +41,7 @@ const iconMapping: { [key: string]: SkillIcon } = {
   "Logstash": "/images/logos/logstash.svg",
   "Kibana": "/images/logos/kibana.svg",
   "Beats": "/images/logos/beats.svg",
+  "OpenSearch": "/images/logos/opensearch.svg",
   "Grafana": SiGrafana, // Or use local if available, but SiGrafana is fine
   "ELK Stack": SiElasticstack,
 

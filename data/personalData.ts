@@ -18,7 +18,7 @@ export const personalData = {
   skills: {
     languages: ["Python", "Golang", "SQL", "Bash"],
     devops: ["Docker", "Kubernetes", "GitLab CI", "ArgoCD", "Ansible"],
-    dataEngineering: ["Elasticsearch", "Logstash", "Kibana", "Beats"],
+    dataEngineering: ["Elasticsearch", "OpenSearch", "Logstash", "Kibana", "Beats"],
     database: ["MySQL", "Redis"],
     networkSecurity: ["Fortinet", "F5", "Cisco", "Palo Alto", "Linux", "Windows"],
   },
@@ -261,20 +261,6 @@ export const personalData = {
       link: "/certificates/CKAD.png",
       image: "/certificates/CKAD.png",
       type: "course",
-    },
-    {
-      name: "Elastic Certified Engineer",
-      issuer: "Elastic",
-      date: "202X",
-      link: "#",
-      type: "certification",
-    },
-    {
-      name: "Certified Kubernetes Administrator (CKA)",
-      issuer: "CNCF",
-      date: "202X",
-      link: "#",
-      type: "certification",
     },
   ],
 };
