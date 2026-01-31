@@ -15,6 +15,29 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Russell Chen | DevOps & Data Engineer",
   description: "Portfolio of Russell Chen, specializing in Backend, Data Engineering, and DevOps.",
+  metadataBase: new URL("https://lmsla.github.io/my-portfolio/"),
+  openGraph: {
+    title: "Russell Chen | DevOps & Data Engineer",
+    description: "Portfolio of Russell Chen, specializing in Backend, Data Engineering, and DevOps.",
+    url: "https://lmsla.github.io/my-portfolio/",
+    siteName: "Russell Chen's Portfolio",
+    images: [
+      {
+        url: "/images/projects/portfolio/home.png",
+        width: 1200,
+        height: 630,
+        alt: "Russell Chen Portfolio Preview",
+      },
+    ],
+    locale: "zh_TW",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Russell Chen | DevOps & Data Engineer",
+    description: "Portfolio of Russell Chen, specializing in Backend, Data Engineering, and DevOps.",
+    images: ["/images/projects/portfolio/home.png"],
+  },
 };
 
 import Navbar from "@/components/Navbar";
