@@ -6,7 +6,7 @@ export const personalData = {
   title: "Data Engineer & DevOps",
   tagline: "鏈接基礎設施、數據與安全，將日誌轉化為深度洞見。",
   about: [
-    "專精於 Elastic Stack (ELK) 大數據平台建置與效能調優，擁有 5 年軟體開發、數據工程及豐富的 SIEM 與日誌分析架構經驗 ; 參與台泥集團、華新麗華等大型企業專案並負責系統維運。",                                                                                     
+    "專精於 Elastic Stack (ELK) 大數據平台建置與效能調優，擁有 5 年軟體開發、數據工程及豐富的 SIEM 與日誌分析架構經驗 ; 參與大型製造集團、金融與電信等企業專案並負責系統維運。",
     "在管理異質環境與大規模數據的過程中，主導開發多項自動化產品(如索引生命週期管理)以解決維運痛點，大幅降低人工維護成本。在管理大規模數據的同時，積極導入DevOps 文化與容器化技術。",                 
     "致力於將繁瑣的維運流程轉化為高效的自動化服務，透過程式碼解決數據治理難題，為企業構建高韌性、可擴展的系統架構。",
   ],
@@ -65,7 +65,7 @@ export const personalData = {
       architectureImage: "/flowcharts/report.svg",
     },
     {
-      title: "是方電訊-中繼系統平台建置案",
+      title: "大型電信機房網路監控中繼平台建置案",
       category: "企業專案",
       timeline: [
         { title: "建置期", date: "2023/08 - 2023/12" },
@@ -77,13 +77,13 @@ export const personalData = {
       gallery: [],
     },
     {
-      title: "宏遠證券SIEM平台建置專案",
+      title: "證券業 SIEM 平台建置專案",
       category: "企業專案",
       timeline: [
         { title: "建置期", date: "2024/09 - 2024/11" },
         { title: "維護期", date: "2024/11 - Present" },
       ],
-      description: "為宏遠證券建置全方位的資安事件管理平台。整合多種異質日誌源（包括 Windows AD、防火牆、Linux 系統等），透過視覺化儀表板即時監控資安威脅與系統健康狀態，提升資安維運效率。\n系統上線後負責為企業提供6小時的教育訓練，進行知識移轉，縮短企業自主運維學習曲線，提升系統穩定性。",
+      description: "為證券業客戶建置全方位的資安事件管理平台。整合多種異質日誌源（包括 Windows AD、防火牆、Linux 系統等），透過視覺化儀表板即時監控資安威脅與系統健康狀態，提升資安維運效率。\n系統上線後負責為企業提供6小時的教育訓練，進行知識移轉，縮短企業自主運維學習曲線，提升系統穩定性。",
       technologies: ["Elasticsearch", "Logstash", "Kibana", "Windows AD", "Fortigate", "Linux"],
       architectureImage: "/flowcharts/honsec.svg",
       gallery: [
@@ -102,9 +102,9 @@ export const personalData = {
       ],
     },
     {
-      title: "華新麗華-SIEM 資訊安全事件管理平台",
+      title: "大型製造集團 SIEM 資訊安全事件管理平台",
       category: "企業專案",
-      description: "為華新麗華集團設計並實施集中式資安資訊與事件管理 (SIEM) 數據平台。該平台透過 Winlogbeat 從 Windows AD 伺服器以及從 F5 WAF、Fortigate、Cisco ASA、Citrix 等關鍵網路安全設備，即時採集日誌數據，並匯入強大的 Logstash 處理管線進行解析與豐富化。架構設計採用高可用性的 Elasticsearch 叢集，分層儲存為 Hot-Warm 節點，以優化近期數據的查詢效能並確保成本效益的長期資料保存。透過客製化的 Kibana 儀表板，提供了全面的資安可視性，有效協助 SOC 團隊偵測與應對資安威脅。\n系統上線後負責為企業提供6小時的教育訓練，進行知識移轉，縮短企業自主運維學習曲線，提升系統穩定性。",
+      description: "為大型製造集團設計並實施集中式資安資訊與事件管理 (SIEM) 數據平台。該平台透過 Winlogbeat 從 Windows AD 伺服器以及從 F5 WAF、Fortigate、Cisco ASA、Citrix 等關鍵網路安全設備，即時採集日誌數據，並匯入強大的 Logstash 處理管線進行解析與豐富化。架構設計採用高可用性的 Elasticsearch 叢集，分層儲存為 Hot-Warm 節點，以優化近期數據的查詢效能並確保成本效益的長期資料保存。透過客製化的 Kibana 儀表板，提供了全面的資安可視性，有效協助 SOC 團隊偵測與應對資安威脅。\n系統上線後負責為企業提供6小時的教育訓練，進行知識移轉，縮短企業自主運維學習曲線，提升系統穩定性。",
       timeline: [
         { title: "建置期", date: "2022/01 - 2022/06" },
         { title: "維護期", date: "2022/06 - Present" },
@@ -123,9 +123,9 @@ export const personalData = {
       ],
     },
     {
-      title: "京城銀行-日誌集中分析管理平台",
+      title: "區域型商業銀行日誌集中分析管理平台",
       category: "企業專案",
-      description: "為京城銀行構建一套全面性的資安數據監控與分析平台。整合多種資產設備日誌（如 ASA, F5 WAF, AD Event 等），透過自動化採集與解析腳本，將異質日誌數據標準化後匯入 Elasticsearch 叢集進行儲存與檢索。平台提供 Kibana Dashboards 進行實時視覺化，並支援告警引擎與戰情室功能，以提升資安事件響應效率。\n系統上線後負責為企業提供6小時的教育訓練，進行知識移轉，縮短企業自主運維學習曲線，提升系統穩定性。",
+      description: "為區域型商業銀行構建一套全面性的資安數據監控與分析平台。整合多種資產設備日誌（如 ASA, F5 WAF, AD Event 等），透過自動化採集與解析腳本，將異質日誌數據標準化後匯入 Elasticsearch 叢集進行儲存與檢索。平台提供 Kibana Dashboards 進行實時視覺化，並支援告警引擎與戰情室功能，以提升資安事件響應效率。\n系統上線後負責為企業提供6小時的教育訓練，進行知識移轉，縮短企業自主運維學習曲線，提升系統穩定性。",
       timeline: [
         { title: "建置期", date: "2022/03 - 2022/10" },
         { title: "維護期", date: "2022/10 - Present" },
@@ -145,9 +145,9 @@ export const personalData = {
       ],
     },
     {
-      title: "台泥集團日誌系統汰換專案",
+      title: "大型水泥製造集團日誌系統汰換專案",
       category: "企業專案",
-      description: "為台泥集團建置基於 ELK Stack 的大數據資安分析平台，汰換舊有系統以提升資安偵測效能。專案橫跨總處與關企，採用高可用性 Elasticsearch 叢集與 Redis 緩衝架構，整合超過 20 種異質日誌源（如 Firewall, AD, Linux, DB）。透過 Logstash 進行數據正規化，並客製化 Kibana 儀表板實現流量分析、威脅偵測等資安可視化，結合自動化告警機制，強化集團整體資安維運監控。\n系統上線後負責為企業提供6小時的教育訓練，進行知識移轉，縮短企業自主運維學習曲線，提升系統穩定性。",
+      description: "為大型水泥製造集團建置基於 ELK Stack 的大數據資安分析平台，汰換舊有系統以提升資安偵測效能。專案橫跨總處與關企，採用高可用性 Elasticsearch 叢集與 Redis 緩衝架構，整合超過 20 種異質日誌源（如 Firewall, AD, Linux, DB）。透過 Logstash 進行數據正規化，並客製化 Kibana 儀表板實現流量分析、威脅偵測等資安可視化，結合自動化告警機制，強化集團整體資安維運監控。\n系統上線後負責為企業提供6小時的教育訓練，進行知識移轉，縮短企業自主運維學習曲線，提升系統穩定性。",
       timeline: [
         { title: "建置期", date: "2024/04 - 2024/08" },
         { title: "維護期", date: "2024/08 - Present" },
@@ -166,9 +166,9 @@ export const personalData = {
       ],
     },
     {
-      title: "政府情治單位-日誌集中分析管理平台",
+      title: "政府高安全性單位日誌集中分析管理平台",
       category: "企業專案",
-      description: "為政府情治單位建置高度安全的日誌集中分析平台。整合多維度的網路設備與系統日誌，透過自定義的解析規則與關聯分析，強化威脅偵測能力。架構設計強調高可用性與數據加密，確保敏感資訊的儲存與傳輸安全。\n系統上線後負責提供6小時的教育訓練，進行知識移轉，縮短企業自主運維學習曲線，提升系統穩定性。",
+      description: "為政府高安全性單位建置高度安全的日誌集中分析平台。整合多維度的網路設備與系統日誌，透過自定義的解析規則與關聯分析，強化威脅偵測能力。架構設計強調高可用性與數據加密，確保敏感資訊的儲存與傳輸安全。\n系統上線後負責提供6小時的教育訓練，進行知識移轉，縮短企業自主運維學習曲線，提升系統穩定性。",
       technologies: ["Elasticsearch", "Logstash", "Kibana", "Beats", "Linux Security"],
       architectureImage: "/flowcharts/nsb.svg",
       timeline: [
@@ -196,9 +196,9 @@ export const personalData = {
       ],
     },
     {
-      title: "台泥集團ELK Enterprise 授權 POC",
+      title: "大型製造集團 ELK Enterprise 授權 POC",
       category: "企業專案",
-      description: "主導 TCCI 企業級 Elastic ELK 平台授權 POC，建置完整資安威脅偵測體系，整合 Security SIEM、Machine Learning 異常偵測與 LLM AI 分析三大模組。成功部署 28 個 ML 異常偵測任務，處理 6.5 億筆記錄，建立使用者行為基線，實時識別高風險事件。\n核心成果：\n1.Security 規則引擎：導入 1411 條官方規則 + 7 條自定義規則，監控 AD/VPN/SSH/LDAP/WMI 攻擊，生成 817 則告警，Attack Discovery 自動關聯暴力破解 → Fortigate 特權存取攻擊鏈 。\n2.開發ML異常偵測精準模型如：Windows AD罕見IP登入、Forti VPN 非典型區域、機敏資料操作\n3.AI 輔助決策：整合 Gemini 2.5，自動生成 5 項應對建議（MFA、重設密碼、IP 封鎖）。\n4.技術貢獻：配置 62.8GB ML 叢集，實現小時級告警（含 KQL 驗證連結），提升資安響應速度 80%，模型精度隨 6.5 億筆數據持續優化。驗證 POC 降低資安事件 MTTR 從天級至小時級，證明企業級部署可行性。",
+      description: "主導大型製造集團企業級 Elastic ELK 平台授權 POC，建置完整資安威脅偵測體系，整合 Security SIEM、Machine Learning 異常偵測與 LLM AI 分析三大模組。成功部署 28 個 ML 異常偵測任務，處理 6.5 億筆記錄，建立使用者行為基線，實時識別高風險事件。\n核心成果：\n1.Security 規則引擎：導入 1411 條官方規則 + 7 條自定義規則，監控 AD/VPN/SSH/LDAP/WMI 攻擊，生成 817 則告警，Attack Discovery 自動關聯暴力破解 → Fortigate 特權存取攻擊鏈 。\n2.開發ML異常偵測精準模型如：Windows AD罕見IP登入、Forti VPN 非典型區域、機敏資料操作\n3.AI 輔助決策：整合 Gemini 2.5，自動生成 5 項應對建議（MFA、重設密碼、IP 封鎖）。\n4.技術貢獻：配置 62.8GB ML 叢集，實現小時級告警（含 KQL 驗證連結），提升資安響應速度 80%，模型精度隨 6.5 億筆數據持續優化。驗證 POC 降低資安事件 MTTR 從天級至小時級，證明企業級部署可行性。",
       technologies: ["Elasticsearch Enterprise", "AI Assistant", "Machine Learning", "SIEM"],
       gallery: [
         {
@@ -264,5 +264,3 @@ export const personalData = {
     },
   ],
 };
-
-
