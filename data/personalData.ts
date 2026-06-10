@@ -26,7 +26,7 @@ export const personalData = {
     {
       title: "數據工程師 / ELK 原廠代理商技術工程師",
       company: "BiMAP 集先鋒科技",
-      years: "2021/04 - Present",
+      years: "2021/04 - 2026/05",
       description: "• 核心系統研發：企業級 SIEM 平台建置，運用 Elastic Stack 整合異質數據源，解決資安監控需求.\n• 自動化工具開發：以 Golang 自研高效能維運工具（如 ES ILM 管理、自動化報表），解決索引管理與數據可視化痛點.\n• DevOps 實踐：導入 Docker 容器化與 GitLab CI/CD 流程，建立標準化部署規範，提升交付效率.\n• 專案交付：負責多個大型客戶（金融、電信、製造）的架構規劃與效能調優，並執行技術轉移與教育訓練.",
       technologies: ["Elasticsearch", "Kibana", "Python", "Golang", "Docker", "Kubernetes", "Ansible"],
     },
@@ -69,7 +69,7 @@ export const personalData = {
       category: "企業專案",
       timeline: [
         { title: "建置期", date: "2023/08 - 2023/12" },
-        { title: "維護期", date: "2023/12 - Present" },
+        { title: "維護期", date: "2023/12 - 2026/05" },
       ],
       description: "主導開發中繼平台核心服務，成功汰換因效能瓶頸而瀕臨失敗的舊系統。透過 Golang (Gin) 重構核心 API，將原本散落在多個監控工具（MRTG, genie ATM, Sevone）的異質數據進行標準化整合。重新設計資料庫架構並建立統一的 CRUD 操作流程，有效管理逾 1,000 台網路設備，解決了報表生成耗時與系統頻繁逾時的關鍵痛點，確保服務穩定運行。",
       technologies: ["Golang", "Gin", "RESTful API", "MySQL", "Redis", "Elasticsearch"],
@@ -81,7 +81,7 @@ export const personalData = {
       category: "企業專案",
       timeline: [
         { title: "建置期", date: "2024/09 - 2024/11" },
-        { title: "維護期", date: "2024/11 - Present" },
+        { title: "維護期", date: "2024/11 - 2026/05" },
       ],
       description: "為證券業客戶建置全方位的資安事件管理平台。整合多種異質日誌源（包括 Windows AD、防火牆、Linux 系統等），透過視覺化儀表板即時監控資安威脅與系統健康狀態，提升資安維運效率。\n系統上線後負責為企業提供6小時的教育訓練，進行知識移轉，縮短企業自主運維學習曲線，提升系統穩定性。",
       technologies: ["Elasticsearch", "Logstash", "Kibana", "Windows AD", "Fortigate", "Linux"],
@@ -107,7 +107,7 @@ export const personalData = {
       description: "為大型製造集團設計並實施集中式資安資訊與事件管理 (SIEM) 數據平台。該平台透過 Winlogbeat 從 Windows AD 伺服器以及從 F5 WAF、Fortigate、Cisco ASA、Citrix 等關鍵網路安全設備，即時採集日誌數據，並匯入強大的 Logstash 處理管線進行解析與豐富化。架構設計採用高可用性的 Elasticsearch 叢集，分層儲存為 Hot-Warm 節點，以優化近期數據的查詢效能並確保成本效益的長期資料保存。透過客製化的 Kibana 儀表板，提供了全面的資安可視性，有效協助 SOC 團隊偵測與應對資安威脅。\n系統上線後負責為企業提供6小時的教育訓練，進行知識移轉，縮短企業自主運維學習曲線，提升系統穩定性。",
       timeline: [
         { title: "建置期", date: "2022/01 - 2022/06" },
-        { title: "維護期", date: "2022/06 - Present" },
+        { title: "維護期", date: "2022/06 - 2026/05" },
       ],
       technologies: ["Elasticsearch", "Logstash", "Winlogbeat", "Kibana", "F5 WAF", "Fortigate", "Cisco ASA"],
       architectureImage: "/flowcharts/walsin.svg",
@@ -128,7 +128,7 @@ export const personalData = {
       description: "為區域型商業銀行構建一套全面性的資安數據監控與分析平台。整合多種資產設備日誌（如 ASA, F5 WAF, AD Event 等），透過自動化採集與解析腳本，將異質日誌數據標準化後匯入 Elasticsearch 叢集進行儲存與檢索。平台提供 Kibana Dashboards 進行實時視覺化，並支援告警引擎與戰情室功能，以提升資安事件響應效率。\n系統上線後負責為企業提供6小時的教育訓練，進行知識移轉，縮短企業自主運維學習曲線，提升系統穩定性。",
       timeline: [
         { title: "建置期", date: "2022/03 - 2022/10" },
-        { title: "維護期", date: "2022/10 - Present" },
+        { title: "維護期", date: "2022/10 - 2026/05" },
       ],
       technologies: ["Elasticsearch", "Logstash", "Kibana", "Draw.io", "Shell Script", "Go", "ASA", "F5 WAF"], // 根據SVG內容調整
       architectureImage: "/flowcharts/ktb.svg?v=1", 
@@ -150,7 +150,7 @@ export const personalData = {
       description: "為大型水泥製造集團建置基於 ELK Stack 的大數據資安分析平台，汰換舊有系統以提升資安偵測效能。專案橫跨總處與關企，採用高可用性 Elasticsearch 叢集與 Redis 緩衝架構，整合超過 20 種異質日誌源（如 Firewall, AD, Linux, DB）。透過 Logstash 進行數據正規化，並客製化 Kibana 儀表板實現流量分析、威脅偵測等資安可視化，結合自動化告警機制，強化集團整體資安維運監控。\n系統上線後負責為企業提供6小時的教育訓練，進行知識移轉，縮短企業自主運維學習曲線，提升系統穩定性。",
       timeline: [
         { title: "建置期", date: "2024/04 - 2024/08" },
-        { title: "維護期", date: "2024/08 - Present" },
+        { title: "維護期", date: "2024/08 - 2026/05" },
       ],
       technologies: ["Elasticsearch", "Logstash", "Kibana", "Redis", "Filebeat", "Winlogbeat"],
       architectureImage: "/flowcharts/tcci.svg",
@@ -173,7 +173,7 @@ export const personalData = {
       architectureImage: "/flowcharts/nsb.svg",
       timeline: [
         { title: "建置期", date: "2024/12 - 2025/05" },
-        { title: "維護期", date: "2025/05 - Present" },
+        { title: "維護期", date: "2025/05 - 2026/05" },
       ],
       gallery: [],
     },
